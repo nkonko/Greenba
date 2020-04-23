@@ -5,6 +5,7 @@ import { IBrand } from '../shared/models/brand';
 import { IType } from '../shared/models/productType';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
+import { IProduct } from '../shared/models/product';
 
 // Acts like a singlton and get inil when the application starts
 @Injectable({
@@ -36,6 +37,8 @@ export class ShopService {
         })
       );
   }
+
+  getProduct = (id: number) => this.http.get<IProduct>(this.baseUrl + 'products/' + id);
 
   getBrands = () => this.http.get<IBrand[]>(this.baseUrl + 'products/brands');
 
