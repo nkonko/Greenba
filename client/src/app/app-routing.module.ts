@@ -6,14 +6,15 @@ import { ServerErrorComponent } from './core/server-error/server-error.component
 import { NotFoundComponent } from './core/not-found/not-found.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'test-error', component: TestErrorComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  {path: 'not-found', component: NotFoundComponent},
+  {path: '', component: HomeComponent, data: { breadcrumb: 'Home'}},
+  // data for the breadcrumb
+  {path: 'test-error', component: TestErrorComponent, data: { breadcrumb: 'Test Errors'}},
+  {path: 'server-error', component: ServerErrorComponent, data: { breadcrumb: 'Server Errors'}},
+  {path: 'not-found', component: NotFoundComponent, data: { breadcrumb: 'Not Found'}},
   // lazy loading, will only be actived when we using the /shop
-  {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule)},
+  {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), data: { breadcrumb: 'Shop'}},
   // For a bad url request
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+  {path: '**', redirectTo: 'not-found', pathMatch: 'full'}
 ];
 
 @NgModule({

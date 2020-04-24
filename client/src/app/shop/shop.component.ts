@@ -4,7 +4,6 @@ import { ShopService } from './shop.service';
 import { IBrand } from '../shared/models/brand';
 import { IType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination/ngx-bootstrap-pagination';
 
 @Component({
   selector: 'app-shop',
@@ -14,7 +13,8 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination/ngx-bootstrap-paginat
 export class ShopComponent implements OnInit {
   // Acces a input from the shop component html
   // Angular 8 static is true of false required , {static: false}
-  @ViewChild('search', { static: true }) searchTerm: ElementRef;
+  // Comes in after the products are available
+  @ViewChild('search', { static: false }) searchTerm: ElementRef;
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
