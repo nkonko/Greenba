@@ -18,6 +18,7 @@ export class SectionHeaderComponent implements OnInit {
     // http calls are finite so they will close after the call
     // Thats why we don't need to unsubscripe them
     // Promises are not subscriptions!
+    //  OnDestory is also a solution
     this.breadcrumb$ = this.bcService.breadcrumbs$;
   }
 
