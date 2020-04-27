@@ -4,3 +4,4 @@ appsettings.json
 *.db
 Infrastructure/.DS_Store
 Infrastructure/Data/.DS_Store
+*rdb
