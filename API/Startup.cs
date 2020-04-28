@@ -3,6 +3,7 @@ using API.Helpers;
 using API.Middleware;
 using AutoMapper;
 using Infrastructure.Data;
+using Infrastructure.Data.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,10 +24,15 @@ namespace API
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddAutoMapper(typeof(MappingProfiles));
+
       services.AddControllers();
 
       services.AddDbContext<StoreContext>(x =>
       x.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
+
+      services.AddDbContext<AppIdentityDbContext>(x => 
+        x.UseSqlite(_configuration.GetConnectionString("IdentityConnection")));
 
       services.AddSingleton<IConnectionMultiplexer>(c =>
       {
@@ -36,9 +42,9 @@ namespace API
       });
 
       services.AddApplicationServices();
+      services.AddIdentityServices(_configuration);
       services.AddSwaggerDocumentation();
 
-      services.AddAutoMapper(typeof(MappingProfiles));
       services.AddCors(opt =>
       {
         opt.AddPolicy("CorsPolicy", policy =>
@@ -53,8 +59,7 @@ namespace API
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       app.UseMiddleware<ExceptionMiddleware>();
-      // So in the even that the request comes into our API server
-      // but we don't have an end point this will redirect the call
+      
       app.UseStatusCodePagesWithReExecute("/erros/{0}");
 
       app.UseHttpsRedirection();
@@ -65,6 +70,8 @@ namespace API
 
       app.UseCors("CorsPolicy");
 
+      app.UseAuthentication();
+      
       app.UseAuthorization();
 
       app.UseSwaggerDocumentation();
