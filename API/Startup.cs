@@ -60,7 +60,7 @@ namespace API
     {
       app.UseMiddleware<ExceptionMiddleware>();
       
-      app.UseStatusCodePagesWithReExecute("/erros/{0}");
+      app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
       app.UseHttpsRedirection();
 
