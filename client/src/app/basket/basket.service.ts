@@ -23,7 +23,7 @@ export class BasketService {
     // Nothing happens here because we did not subscripe to the HTTP GET method
     // For that we are going to use the async pipe inside the components (html)
     // that is why we use the pipe method here and not the subscripe (146)
-    // we dont want to call it directy
+    // we dont want to call it directly
     return this.http.get<IBasket>(this.baseUrl + 'basket?id=' + id).pipe(
       map((basket: IBasket) => {
         // set the next value for the behavior Subject (obserable)
