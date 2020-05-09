@@ -5,12 +5,12 @@ import { IOrder } from 'src/app/shared/models/order';
 @Component({
   selector: 'app-checkout-success',
   templateUrl: './checkout-success.component.html',
-  styleUrls: ['./checkout-success.component.scss']
+  styleUrls: ['./checkout-success.component.scss'],
 })
 export class CheckoutSuccessComponent implements OnInit {
   order: IOrder;
 
-  constructor(private router: Router) { 
+  constructor(private router: Router) {
     // Needs to be done inside the constructor.
     // This can not been done inside the ngInit
     const navigation = this.router.getCurrentNavigation();
@@ -20,7 +20,5 @@ export class CheckoutSuccessComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
