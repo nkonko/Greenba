@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { IBasket, IBasketItem, Basket, IBasketTotals } from '../shared/models/basket';
+import {
+  IBasket,
+  IBasketItem,
+  Basket,
+  IBasketTotals,
+} from '../shared/models/basket';
 import { map } from 'rxjs/operators';
 import { IProduct } from '../shared/models/product';
 import { IDeliveryMethod } from '../shared/models/deliveryMethod';
@@ -22,10 +27,27 @@ export class BasketService {
 
   constructor(private http: HttpClient) {}
 
-  setShippingPrice(deliveryMethod: IDeliveryMethod){
+  createPaymentIntent() {
+    // we want to update the basket source, so we will use the pipe.
+    return this.http.post(this.baseUrl + 'payments/' + this.getCurrentBasketValue().id, {})
+      .pipe(
+        map((basket: IBasket) => {
+          // Our basket got now the payment intendId + client secret
+          this.basketSource.next(basket);
+        })
+      );
+  }
+
+  setShippingPrice(deliveryMethod: IDeliveryMethod) {
     this.shipping = deliveryMethod.price;
+    const basket = this.getCurrentBasketValue();
+    // Update the basket with the new delivery id
+    basket.deliveryMethodId = deliveryMethod.id;
+    basket.shippingPrice = deliveryMethod.price;
+
     // update the observable
     this.calculateTotals();
+    this.setBasket(basket);
   }
 
   getBasket(id: string) {
@@ -37,6 +59,7 @@ export class BasketService {
       map((basket: IBasket) => {
         // set the next value for the behavior Subject (obserable)
         this.basketSource.next(basket);
+        this.shipping = basket.shippingPrice;
         this.calculateTotals();
       })
     );
@@ -70,14 +93,14 @@ export class BasketService {
 
   incrementItemQuantity(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
-    const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
+    const foundItemIndex = basket.items.findIndex((x) => x.id === item.id);
     basket.items[foundItemIndex].quantity++;
     this.setBasket(basket);
   }
 
   decrementItemQuantity(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
-    const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
+    const foundItemIndex = basket.items.findIndex((x) => x.id === item.id);
 
     if (basket.items[foundItemIndex].quantity > 1) {
       basket.items[foundItemIndex].quantity--;
@@ -91,8 +114,8 @@ export class BasketService {
   removeItemFromBasket(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
 
-    if (basket.items.some(x => x.id === item.id)){
-      basket.items = basket.items.filter(i => i.id !== item.id);
+    if (basket.items.some((x) => x.id === item.id)) {
+      basket.items = basket.items.filter((i) => i.id !== item.id);
       if (basket.items.length > 0) {
         this.setBasket(basket);
       } else {
@@ -101,29 +124,28 @@ export class BasketService {
     }
   }
 
-  deleteLocalBasket() {
+  deleteBasket(basket: IBasket) {
+    return this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe(
+      () => {
+        this.deleteLocalBasket();
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  private deleteLocalBasket() {
     this.basketSource.next(null);
     this.basketTotalSource.next(null);
     localStorage.removeItem('basket_id');
-  }
-
-  private deleteBasket(basket: IBasket) {
-    return this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe(
-      () => {
-        this.basketSource.next(null);
-        this.basketTotalSource.next(null);
-        localStorage.removeItem('basket_id');
-      }, error => console.log(error)
-    );
   }
 
   private calculateTotals() {
     const basket = this.getCurrentBasketValue();
     const shipping = this.shipping;
     // b is the item - a is the result we are returning , init is 0
-    const subtotal  = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
+    const subtotal = basket.items.reduce((a, b) => b.price * b.quantity + a, 0);
     const total = shipping + subtotal;
-    this.basketTotalSource.next({shipping, total, subtotal});
+    this.basketTotalSource.next({ shipping, total, subtotal });
   }
 
   private addOrUpdateItem(
