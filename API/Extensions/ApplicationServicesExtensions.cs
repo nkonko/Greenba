@@ -20,6 +20,8 @@ namespace API.Extensions
       services.AddScoped<IBasketRepository, BasketRepository>();
       services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
 
+      services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+
       // 53
       services.Configure<ApiBehaviorOptions>(options =>
       {

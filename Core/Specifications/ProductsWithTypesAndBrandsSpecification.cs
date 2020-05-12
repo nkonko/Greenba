@@ -5,10 +5,13 @@ namespace Core.Specifications
   public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product>
   {
     // constructor with no paramaters
+    // || or else , x.Name.ToLower().Contains(productParams.Search)) to find products with the search term
+    // First we check if there is an existing value
     public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams)
       : base(x =>
         (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
         (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
+        // If false the right side will be executed
         (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
       )
     {

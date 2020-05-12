@@ -18,7 +18,7 @@ export class ShopComponent implements OnInit {
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
-  shopParams = new ShopParams();
+  shopParams: ShopParams;
   totalCount: number;
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },
@@ -26,20 +26,24 @@ export class ShopComponent implements OnInit {
     { name: 'Price: High to Low', value: 'priceDesc' },
   ];
 
-  constructor(private shopService: ShopService) {}
+  constructor(private shopService: ShopService) {
+    // We init the shop params from our service
+    this.shopParams = this.shopService.getShopParams();
+  }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getProducts(true);
     this.getBrands();
     this.getTypes();
   }
 
-  getProducts() {
-    this.shopService.getProducts(this.shopParams).subscribe(
+  getProducts(useCache = false) {
+    // We moved the shop param paramater inside the service, for performance increase 284
+    this.shopService.getProducts(useCache).subscribe(
       (response) => {
         this.products = response.data;
-        this.shopParams.pageNumber = response.pageIndex;
-        this.shopParams.pageSize = response.pageSize;
+        // this.shopParams.pageNumber = response.pageIndex;
+        // this.shopParams.pageSize = response.pageSize;
         this.totalCount = response.count;
       },
       (error) => {
@@ -71,45 +75,54 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brandId: number) {
-    this.shopParams.brandId = brandId;
+    const params = this.shopService.getShopParams();
+    params.brandId = brandId;
     // Fixed the error that when we used a filter and the user is on page 2
     // He got a error that the pagenumber was not set to one
-    this.shopParams.pageNumber = 1;
+    params.pageNumber = 1;
+    this.shopService.setShopParams(params);
     this.getProducts();
   }
 
   onTypeSelected(typeId: number) {
-    this.shopParams.typeId = typeId;
-    this.shopParams.pageNumber = 1;
+    const params = this.shopService.getShopParams();
+    params.typeId = typeId;
+    params.pageNumber = 1;
+    this.shopService.setShopParams(params);
     this.getProducts();
   }
 
   onSortSelected(sort: string) {
-    console.log(sort);
-    this.shopParams.sort = sort;
+    const params = this.shopService.getShopParams();
+    params.sort = sort;
+    this.shopService.setShopParams(params);
     this.getProducts();
   }
 
   onPageChanged(pageNumber: number) {
+    const params = this.shopService.getShopParams();
     // avoids the bug that the api calls gets triggerd twice
     // This because when a user clicks a filter the total items will be updated.
     // When the update happens the pager.compenten html will also trigger the pageChangedEvent
-    if (this.shopParams.pageNumber !== pageNumber){
-      this.shopParams.pageNumber = pageNumber;
-      this.getProducts();
+    if (params.pageNumber !== pageNumber){
+      params.pageNumber = pageNumber;
+      this.shopService.setShopParams(params);
+      this.getProducts(true);
     }
-
   }
 
   onSearch() {
-    this.shopParams.search = this.searchTerm.nativeElement.value;
-    this.shopParams.pageNumber = 1;
+    const params = this.shopService.getShopParams();
+    params.search = this.searchTerm.nativeElement.value;
+    params.pageNumber = 1;
+    this.shopService.setShopParams(params);
     this.getProducts();
   }
 
   onReset() {
     this.searchTerm.nativeElement.value = '';
     this.shopParams = new ShopParams();
+    this.shopService.setShopParams(this.shopParams);
     this.getProducts();
   }
 }

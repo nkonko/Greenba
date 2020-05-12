@@ -1,8 +1,11 @@
+<!-- page number requires a ngmodel (so no just a input property)-->
+<!-- for that we added the ngmodels to the shared module-->
 <pagination
   (pageChanged)="onPagerChange($event)"
   [itemsPerPage]="pageSize"
   [boundaryLinks]="true"
   [totalItems]="totalCount"
+  [ngModel]="pageNumber"
   previousText="&lsaquo;"
   nextText="&rsaquo;"
   firstText="&laquo;"

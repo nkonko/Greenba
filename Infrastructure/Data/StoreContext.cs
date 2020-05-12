@@ -25,7 +25,7 @@ namespace Infrastructure.Data
     {
       // base == dbContext class (where we derive from)
       base.OnModelCreating(modelBuilder);
-      // The assembly where we have the our configurations
+      // The assembly where we have our configurations
       modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
       if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
