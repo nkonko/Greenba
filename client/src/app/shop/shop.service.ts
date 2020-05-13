@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
 import { IProduct } from '../shared/models/product';
 import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 // Angular will delete all data after a compontent has been destoyed
 // Services are injected at start-up and are available for the life time our application is running
@@ -19,7 +20,7 @@ import { of } from 'rxjs';
   providedIn: 'root',
 })
 export class ShopService {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
 
   products: IProduct[] = [];
   brands: IBrand[] = [];
@@ -44,7 +45,7 @@ export class ShopService {
 
       // If this is smaller we now that we got the items in our (cache) variable
       if (this.shopParams.pageNumber <= pagesReceived) {
-        //285 3:00
+        // 285 3:00
         this.pagination.data = this.products.slice(
           (this.shopParams.pageNumber - 1) * this.shopParams.pageSize,
           this.shopParams.pageNumber * this.shopParams.pageSize
@@ -102,7 +103,7 @@ export class ShopService {
     if (product) {
       return of(product);
     }
-    this.http.get<IProduct>(this.baseUrl + 'products/' + id);
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 
   getBrands() {

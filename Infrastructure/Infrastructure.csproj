@@ -1,5 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <!-- This will also copy the files into our bin folder, and not 
+    just the publish directory like the content in our API.csproj file 296-->
+    <None Include="Data\SeedData\**" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="..\Core\Core.csproj"/>
   </ItemGroup>
   <ItemGroup>
