@@ -1,7 +1,6 @@
 using API.Dtos;
 using AutoMapper;
 using Core.Entities;
-using Core.Entities.Identity;
 using Core.Entities.OrderAggregate;
 
 namespace API.Helpers
@@ -29,6 +28,7 @@ namespace API.Helpers
           .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrderd.ProductName))
           .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.ItemOrderd.PictureUrl))
           .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
+        CreateMap<ProductCreateDto, Product>();
     }
   }
 }
