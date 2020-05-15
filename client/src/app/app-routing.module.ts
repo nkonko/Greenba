@@ -54,7 +54,16 @@ const routes: Routes = [
     path: 'account',
     loadChildren: () =>
       import('./account/account.module').then((mod) => mod.AccountModule),
+      // because we don't have a root account module
+      // we skip the breadcrum for this level of the route
+      // So we dont get a breadcrum automatically
     data: { breadcrumb: { skip: true } },
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((mod) => mod.AdminModule),
+    data: { breadcrumb: 'Admin' },
   },
   // For a bad url request
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' },

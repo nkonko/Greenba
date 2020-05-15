@@ -1,22 +1,43 @@
 <div class="form-label-group">
     <!-- adds classed to our component based on expressions -->
-    <input 
+    <ng-container #input >
+        <ng-container *ngIf="(type !== 'textarea')">
+            <input 
+            [ngClass] ="(controlDir && controlDir.control && controlDir.control.touched) ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+            [type]="type"
+            min="0.01"
+            [value]="controlDir.value"
+            (input)="onChange($event.target.value)"
+            (blur)="onTouched()"
+            id="{{label}}"
+            class="form-control"
+            placeholder="{{label}}"
+         >
+            <label for="{{label}}">{{label}}</label>
+        </ng-container>
+
+     <textarea 
+        *ngIf="(type === 'textarea')"
         [ngClass] ="(controlDir && controlDir.control && controlDir.control.touched) ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
-        [type]="type"
+        class="form-control"
+        rows="3"
+        [value]="controlDir.value"
         (input)="onChange($event.target.value)"
         (blur)="onTouched()"
         id="{{label}}"
-        #input 
         class="form-control"
         placeholder="{{label}}"
-     >
+        ></textarea> 
+    </ng-container>
+
      <!-- async validation will give our control the status pending-->
      <div *ngIf="(controlDir && controlDir.control && controlDir.control.status === 'PENDING')" class="fa fa-spinner fa-spin loader"></div>
-    <label for="{{label}}">{{label}}</label>
     <!-- sync validtion -->
     <div class="invalid-feedback" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched)">
         <span *ngIf="controlDir.control.errors?.required">{{label}} Is required</span>
         <span *ngIf="controlDir.control.errors?.pattern">Invalid email address</span>
+        <span *ngIf="controlDir.control.errors?.min">{{label}} Needs to be greather then zero</span>
+        <span *ngIf="controlDir.control.hasError('noDecimal')">Product price needs to be decimal value</span>
     </div>
 
     <div class="invalid-feedback d-block" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.dirty)">

@@ -1,0 +1,27 @@
+<div class="form-label-group">
+    <!-- adds classed to our component based on expressions -->
+    <select 
+      id="{{label}}" 
+      class="form-control" 
+      #input 
+      (change)="onChange(+$event.target.value)" 
+      (blur)="onTouched()"
+      [ngClass] ="(controlDir && controlDir.control && controlDir.control.touched) ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+      >
+      <option value="null" label="-- Select option --" disabled selected="selected">      
+      </option>
+        <option *ngFor="let item of Items"
+          [value]="item.id"
+          [selected]="item.id === selectedId"
+        >
+          {{item.name}}
+        </option>
+      </select>
+
+        <!-- sync validtion -->
+      <div id={{label}} class="invalid-feedback d-block" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched)">
+        <span *ngIf="controlDir.control.errors?.required">{{label}} Is required</span>
+    </div>
+    
+
+  </div>
