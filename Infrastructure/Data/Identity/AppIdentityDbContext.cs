@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data.Identity
 {
-    public class AppIdentityDbContext : IdentityDbContext<AppUser>
+    // Next, we need to adjust the AppIdentityDbContext to include the new AppRole and we also need to specify the Id type here as well. 
+    //Since we are sticking with the defaults this will mean that we use a string as the Id for these Identity classes
+    public class AppIdentityDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options) {}
 
