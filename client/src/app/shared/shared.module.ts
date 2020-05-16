@@ -22,7 +22,7 @@ import { SelectDropdownComponent } from './components/select-dropdown/select-dro
     TextInputComponent,
     StepperComponent,
     BasketSummaryComponent,
-    SelectDropdownComponent
+    SelectDropdownComponent,
   ],
   imports: [
     CommonModule,

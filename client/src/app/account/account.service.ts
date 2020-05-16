@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject, of } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { IUser } from '../shared/models/user';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -20,12 +21,14 @@ export class AccountService {
   // Now our authguard is going to wait until it got something and then continues.
   private currentUsersource = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUsersource.asObservable();
+  jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router) { }
 
   loadCurrentUser(token: string) {
     if (token === null) {
-      this.currentUsersource.next();
+      this.currentUsersource.next(null);
+      token = null;
       // of() returns a observable
       return of(null);
     }
@@ -37,7 +40,7 @@ export class AccountService {
       // we map the user object we receive into our current user abservable
       map((user: IUser) => {
         if (user) {
-          localStorage.setItem('Token', user.token);
+          localStorage.setItem('token', user.token);
           this.currentUsersource.next(user);
         }
       })
@@ -82,5 +85,29 @@ export class AccountService {
 
   updateUserAddress(address: IAddress) {
     return this.http.put<IAddress>(this.baseUrl + 'account/address', address);
+  }
+
+  getRoles() {
+    const token = localStorage.getItem('token');
+
+    if (!token) { return null; }
+
+    return this.jwtHelper.decodeToken(token).role as Array<string>;
+  }
+
+  hasRole(roles: Array<string>){
+    let hasRole = false;
+    const role = this.getRoles();
+
+    if (!role) { return false; }
+
+    roles.forEach(element => {
+      if (role.includes(element)) {
+        hasRole = true;
+        return;
+      }
+    });
+    console.log('hasRole', hasRole);
+    return hasRole;
   }
 }

@@ -84,6 +84,7 @@ namespace API.Controllers
         public async Task<ActionResult<Product>> UpdateProduct(int id , ProductCreateDto productToUpdate)
         {
           var product = await _unitOfWork.Repository<Product>().GetByIdAsync(id);
+          productToUpdate.PictureUrl = product.PictureUrl;
           
           _mapper.Map(productToUpdate, product);
 
