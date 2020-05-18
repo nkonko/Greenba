@@ -105,6 +105,15 @@ namespace API.Controllers
         {
             var product = await _unitOfWork.Repository<Product>().GetByIdAsync(id);
 
+            foreach (var photo in product.Photos)
+            {
+                // So that we don't delete the seeded ones
+                if (photo.Id > 18)
+                {
+                    _photoService.DeleteFromDisk(photo);
+                }
+            }
+
             _unitOfWork.Repository<Product>().Delete(product);
 
             var result = await _unitOfWork.Complete();

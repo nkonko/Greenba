@@ -1,44 +1,21 @@
 <section class="product-edit mt-5">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
-        <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <app-text-input [label]="'Product name'" formControlName="name"></app-text-input>
-            </div>
-            <div class="form-group col-md-6">
-              <app-text-input [label]="'Price'" [type]="'number'" formControlName="price"></app-text-input>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <app-text-input [label]="'Description'" [type]="'textarea'" formControlName="description"></app-text-input>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Types</label>
-              <app-select-dropdown 
-              formControlName="productTypeId"
-              [label]="'Types'" 
-              [Items]="types" 
-              [selectedId]="product.productTypeId"></app-select-dropdown>
-            </div>
-            <div class="form-group col-md-6">
-              <label>Brands</label>
-              <app-select-dropdown 
-              formControlName="productBrandId"
-              [label]="'Brand'" 
-              [Items]="brands" 
-              [selectedId]="product.productBrandId"></app-select-dropdown>
-            </div>
-          </div>
-          <button [disabled]="editProductForm.invalid" type="submit" class="btn btn-primary my-3 float-right">Submit</button>
-        </form>
+      <div class="col-12">
+        <div class="tab-panel">
+          <tabset class="product-tabset">
+            <tab heading="Edit Product">
+              <div class="col-lg-8">
+                <app-edit-product-form [product]="productFormValues" [brands]="brands" [types]="types"></app-edit-product-form>
+              </div>
+            </tab>
+            <tab heading="Edit Photos">
+              <app-edit-product-photos [product]="product"></app-edit-product-photos>
+            </tab>
+          </tabset>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
-
-

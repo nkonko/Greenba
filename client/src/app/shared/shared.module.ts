@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
@@ -13,7 +14,10 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { RouterModule } from '@angular/router';
 import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
-import {NgxGalleryModule} from '@kolkov/ngx-gallery';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { PhotoWidgetComponent } from './components/photo-widget/photo-widget.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
     StepperComponent,
     BasketSummaryComponent,
     SelectDropdownComponent,
+    PhotoWidgetComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +42,10 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
     FormsModule,
     CdkStepperModule,
     RouterModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    TabsModule.forRoot(),
+    NgxDropzoneModule,
+    ImageCropperModule,
   ],
   exports: [
     PaginationModule,
@@ -54,7 +62,11 @@ import {NgxGalleryModule} from '@kolkov/ngx-gallery';
     StepperComponent,
     BasketSummaryComponent,
     SelectDropdownComponent,
-    NgxGalleryModule
+    NgxGalleryModule,
+    TabsModule,
+    NgxDropzoneModule,
+    ImageCropperModule,
+    PhotoWidgetComponent,
   ],
 })
 export class SharedModule {}
