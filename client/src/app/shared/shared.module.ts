@@ -13,6 +13,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { RouterModule } from '@angular/router';
 import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
+import {NgxGalleryModule} from '@kolkov/ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SelectDropdownComponent } from './components/select-dropdown/select-dro
     ReactiveFormsModule,
     FormsModule,
     CdkStepperModule,
-    RouterModule
+    RouterModule,
+    NgxGalleryModule
   ],
   exports: [
     PaginationModule,
@@ -51,7 +53,8 @@ import { SelectDropdownComponent } from './components/select-dropdown/select-dro
     CdkStepperModule,
     StepperComponent,
     BasketSummaryComponent,
-    SelectDropdownComponent
+    SelectDropdownComponent,
+    NgxGalleryModule
   ],
 })
 export class SharedModule {}
