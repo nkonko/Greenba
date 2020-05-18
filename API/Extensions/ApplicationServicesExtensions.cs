@@ -1,5 +1,6 @@
 using System.Linq;
 using API.Errors;
+using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Services;
@@ -12,6 +13,7 @@ namespace API.Extensions
   {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+      services.AddScoped<IPhotoService, PhotoService>();
       services.AddScoped<IUnitOfWork, UnitOfWork>();
       services.AddScoped<IOrderService, OrderService>();
       services.AddScoped<IPaymentService, PaymentService>();

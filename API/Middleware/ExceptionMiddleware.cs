@@ -14,6 +14,9 @@ namespace API.Middleware
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionMiddleware> _logger;
     private readonly IHostEnvironment _env;
+
+    // Catches the internal server error exceptions
+    // and will return a normalized error back to the client (conform the other erros)
     public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
     {
       _env = env;
