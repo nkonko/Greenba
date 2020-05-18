@@ -13,7 +13,7 @@ namespace Infrastructure.Data.config
         builder.Property(p => p.Description).IsRequired();
         // Number of decimal places is gonne be to two
         builder.Property(p => p.Price).HasColumnType("decimal(18,2)");
-        builder.Property(p => p.PictureUrl).IsRequired();
+        //builder.Property(p => p.PictureUrl).IsRequired();
         // a product has one brand, but a brand can be associated with many products
         builder.HasOne(b => b.ProductBrand).WithMany().HasForeignKey(p => p.ProductBrandId);
         builder.HasOne(t => t.ProductType).WithMany().HasForeignKey(p => p.ProductTypeId);

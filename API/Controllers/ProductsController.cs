@@ -65,10 +65,9 @@ namespace API.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<Product>> CreateProduct(ProductCreateDto productToCreate)
+        public async Task<ActionResult<ProductToReturnDto>> CreateProduct(ProductCreateDto productToCreate)
         {
           var product = _mapper.Map<ProductCreateDto, Product>(productToCreate);
-          product.PictureUrl = "images/products/placeholder.png";
 
           _unitOfWork.Repository<Product>().Add(product);
 
@@ -81,10 +80,9 @@ namespace API.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<Product>> UpdateProduct(int id , ProductCreateDto productToUpdate)
+        public async Task<ActionResult<ProductToReturnDto>> UpdateProduct(int id , ProductCreateDto productToUpdate)
         {
           var product = await _unitOfWork.Repository<Product>().GetByIdAsync(id);
-          productToUpdate.PictureUrl = product.PictureUrl;
           
           _mapper.Map(productToUpdate, product);
 
