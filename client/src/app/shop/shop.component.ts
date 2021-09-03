@@ -11,9 +11,6 @@ import { ShopParams } from '../shared/models/shopParams';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  // Acces a input from the shop component html
-  // Angular 8 static is true of false required , {static: false}
-  // Comes in after the products are available
   @ViewChild('search', { static: false }) searchTerm: ElementRef;
   products: IProduct[];
   brands: IBrand[];
@@ -21,13 +18,12 @@ export class ShopComponent implements OnInit {
   shopParams: ShopParams;
   totalCount: number;
   sortOptions = [
-    { name: 'Alphabetical', value: 'name' },
-    { name: 'Price: Low to High', value: 'priceAsc' },
-    { name: 'Price: High to Low', value: 'priceDesc' },
+    { name: 'Alfabetico', value: 'name' },
+    { name: 'Precio: Bajo a alto', value: 'priceAsc' },
+    { name: 'Precio: Alto a bajo', value: 'priceDesc' },
   ];
 
   constructor(private shopService: ShopService) {
-    // We init the shop params from our service
     this.shopParams = this.shopService.getShopParams();
   }
 
@@ -38,13 +34,9 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts(useCache = false) {
-    // We moved the shop param paramater inside the service, for performance increase 284
     this.shopService.getProducts(useCache).subscribe(
       (response) => {
         this.products = response.data;
-        // We move this to the service
-        // this.shopParams.pageNumber = response.pageIndex;
-        // this.shopParams.pageSize = response.pageSize;
         this.totalCount = response.count;
       },
       (error) => {
@@ -56,7 +48,7 @@ export class ShopComponent implements OnInit {
   getBrands() {
     this.shopService.getBrands().subscribe(
       (response) => {
-        this.brands = [{ id: 0, name: 'All' }, ...response];
+        this.brands = [{ id: 0, name: 'Todas' }, ...response];
       },
       (error) => {
         console.log(error);
@@ -67,7 +59,7 @@ export class ShopComponent implements OnInit {
   getTypes() {
     this.shopService.getTypes().subscribe(
       (response) => {
-        this.types = [{ id: 0, name: 'All' }, ...response];
+        this.types = [{ id: 0, name: 'Todas' }, ...response];
       },
       (error) => {
         console.log(error);
@@ -78,8 +70,6 @@ export class ShopComponent implements OnInit {
   onBrandSelected(brandId: number) {
     const params = this.shopService.getShopParams();
     params.brandId = brandId;
-    // Fixed the error that when we used a filter and the user is on page 2
-    // He got a error that the pagenumber was not set to one
     params.pageNumber = 1;
     this.shopService.setShopParams(params);
     this.getProducts();
@@ -102,9 +92,6 @@ export class ShopComponent implements OnInit {
 
   onPageChanged(pageNumber: number) {
     const params = this.shopService.getShopParams();
-    // avoids the bug that the api calls gets triggerd twice
-    // This because when a user clicks a filter the total items will be updated.
-    // When the update happens the pager.compenten html will also trigger the pageChangedEvent
     if (params.pageNumber !== pageNumber){
       params.pageNumber = pageNumber;
       this.shopService.setShopParams(params);

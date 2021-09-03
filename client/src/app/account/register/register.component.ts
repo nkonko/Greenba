@@ -22,12 +22,8 @@ export class RegisterComponent implements OnInit {
 
   createRegisterForm() {
     this.registerForm = this.fb.group({
-      // first paramater = initial val
       displayName: [null, [Validators.required]],
-      // sync validators
       email: [null, [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')] ,
-        // Async validators
-        // Those are only get called when our sync validators have passed validation
         [this.validateEmailNotTaken()]],
       password: [null, [Validators.required]]
     });
@@ -42,21 +38,15 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // Async validator to check if our email address exist (while typing).
   validateEmailNotTaken(): AsyncValidatorFn {
     return control => {
-      // Delay so that we dont always make a request.
       return timer(500).pipe(
-        // 201
-        // return the inner observable to our control (which is te outer observable)
         switchMap(() => {
           if (!control.value) {
-            // of - return a observable of something
             return of(null);
           }
           return this.accountService.checkEmailExists(control.value).pipe(
             map(res => {
-              // emailExists can we make up ourself to call the validator
               return res ? {emailExists: true} : null;
             })
           );

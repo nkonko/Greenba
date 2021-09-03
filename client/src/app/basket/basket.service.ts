@@ -28,11 +28,9 @@ export class BasketService {
   constructor(private http: HttpClient) {}
 
   createPaymentIntent() {
-    // we want to update the basket source, so we will use the pipe.
     return this.http.post(this.baseUrl + 'payments/' + this.getCurrentBasketValue().id, {})
       .pipe(
         map((basket: IBasket) => {
-          // Our basket got now the payment intendId + client secret
           this.basketSource.next(basket);
         })
       );
@@ -41,23 +39,16 @@ export class BasketService {
   setShippingPrice(deliveryMethod: IDeliveryMethod) {
     this.shipping = deliveryMethod.price;
     const basket = this.getCurrentBasketValue();
-    // Update the basket with the new delivery id
     basket.deliveryMethodId = deliveryMethod.id;
     basket.shippingPrice = deliveryMethod.price;
 
-    // update the observable
     this.calculateTotals();
     this.setBasket(basket);
   }
 
   getBasket(id: string) {
-    // Nothing happens here because we did not subscripe to the HTTP GET method
-    // For that we are going to use the async pipe inside the components (html)
-    // that is why we use the pipe method here and not the subscripe (146)
-    // we dont want to call it directly
     return this.http.get<IBasket>(this.baseUrl + 'basket?id=' + id).pipe(
       map((basket: IBasket) => {
-        // set the next value for the behavior Subject (obserable)
         this.basketSource.next(basket);
         this.shipping = basket.shippingPrice;
         this.calculateTotals();
@@ -84,7 +75,6 @@ export class BasketService {
       item,
       quantity
     );
-    // ?? if null then do this/
     const basket = this.getCurrentBasketValue() ?? this.createBasket();
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
 
@@ -110,7 +100,6 @@ export class BasketService {
     }
   }
 
-  // use this somewhere else
   removeItemFromBasket(item: IBasketItem) {
     const basket = this.getCurrentBasketValue();
 
@@ -142,7 +131,6 @@ export class BasketService {
   private calculateTotals() {
     const basket = this.getCurrentBasketValue();
     const shipping = this.shipping;
-    // b is the item - a is the result we are returning , init is 0
     const subtotal = basket.items.reduce((a, b) => b.price * b.quantity + a, 0);
     const total = shipping + subtotal;
     this.basketTotalSource.next({ shipping, total, subtotal });

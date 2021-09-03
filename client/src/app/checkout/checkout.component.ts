@@ -28,11 +28,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   createCheckoutForm() {
-    // you can have formgroups inside formgroups
-    // We are making here every form for our 3 tabs / forms
-    // We can access those forms individually
-    // we can validate each of those forms individually
-    // but we can also validate the form as a hole
     this.checkoutForm = this.fb.group({
       addressForm: this.fb.group({
         firstName: [null, Validators.required],
@@ -55,7 +50,6 @@ export class CheckoutComponent implements OnInit {
     this.accountService.getUserAddress().subscribe(
       (address) => {
         if (address) {
-          // angular will map all the values itself
           this.checkoutForm.get('addressForm').patchValue(address);
         }
       },

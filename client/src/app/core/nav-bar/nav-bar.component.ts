@@ -17,8 +17,6 @@ export class NavBarComponent implements OnInit {
   constructor(private basketService: BasketService, private accountService: AccountService) { }
 
   ngOnInit(): void {
-    // and because this is our observable () we made it , we want to make sure this is disposed correctly
-    // For that we are using the async pipe again inside the template.
     this.basket$ = this.basketService.basket$;
     this.currentUser$ = this.accountService.currentUser$;
   }

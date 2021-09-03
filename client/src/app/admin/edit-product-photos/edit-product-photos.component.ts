@@ -29,7 +29,6 @@ export class EditProductPhotosComponent implements OnInit {
         case HttpEventType.UploadProgress:
           this.progress = Math.round(event.loaded / event.total * 100);
           break;
-        // case the upload is done and we got a response back
         case HttpEventType.Response:
           this.product = event.body;
           setTimeout(() => {
@@ -41,7 +40,7 @@ export class EditProductPhotosComponent implements OnInit {
       if (error.errors) {
         this.toast.error(error.errors[0]);
       } else {
-        this.toast.error('Problem uploading image');
+        this.toast.error('Problema al cargar imagen');
       }
       this.progress = 0;
     });
@@ -52,7 +51,7 @@ export class EditProductPhotosComponent implements OnInit {
       const photoIndex = this.product.photos.findIndex(x => x.id === photoId);
       this.product.photos.splice(photoIndex, 1);
     }, error => {
-      this.toast.error('Problem deleting photo');
+      this.toast.error('Problema al borrar imagen');
       console.log(error);
     });
   }

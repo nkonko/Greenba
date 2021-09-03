@@ -20,9 +20,7 @@ export class CheckoutAddressComponent implements OnInit {
   saveUserAddress() {
     this.accountService.updateUserAddress(this.checkoutForm.get('addressForm').value)
     .subscribe((address: IAddress) => {
-      this.toastr.success('Address saved');
-      // Reset the form with the api repsonse values
-      // with that the form is resetted and the use can't click (spam) the save button anymore.
+      this.toastr.success('Direccion guardada');
       this.checkoutForm.get('addressForm').reset(address);
     }, error => {
       this.toastr.error(error.message);

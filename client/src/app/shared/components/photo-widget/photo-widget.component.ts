@@ -18,7 +18,6 @@ export class PhotoWidgetComponent implements OnInit {
   }
 
   onSelect(event) {
-    // First clean the array, so that it contains only one image.
     this.files = [];
     this.files.push(... event.addedFiles);
     this.fileChangeEvent(this.files[0]);

@@ -42,12 +42,11 @@ export class AdminComponent implements OnInit {
     this.adminservice.deleteProduct(id).subscribe(() => {
        this.products.splice(this.products.findIndex(p => p.id === id), 1);
        this.totalCount --;
-       // This fixes the error that when a user deletes the last product on the current selected page.
-      //  if ((this.shopParams.pageSize * (this.shopParams.pageNumber - 1)) === this.totalCount){
-      //     this.shopParams.pageNumber --;
-      //     this.shopService.setShopParams(this.shopParams);
-      //     this.getProducts();
-      //  }
+       if ((this.shopParams.pageSize * (this.shopParams.pageNumber - 1)) === this.totalCount){
+         this.shopParams.pageNumber --;
+        this.shopService.setShopParams(this.shopParams);
+       this.getProducts();
+       }
     }, error => console.log(error));
   }
 }

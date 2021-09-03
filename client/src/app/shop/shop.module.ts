@@ -13,8 +13,6 @@ import { ShopRoutingModule } from './shop-routing.module';
     SharedModule,
     ShopRoutingModule
   ],
-  // We need to export it from here, so that the app.module can make use of it
-  // export is removed after lazy loading has been added
   exports: []
 })
 export class ShopModule { }

@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 1,
+        "Name": "Semillas"
+    },
+    {
+        "Id": 2,
+        "Name": "Macetas"
+    },
+    {
+        "Id": 3,
+        "Name": "Jardines verticales"
+    },
+    {
+        "Id": 4,
+        "Name": "Sustratos"
+    },
+    {
+        "Id": 5,
+        "Name": "Insecticidas"
+    },
+    {
+        "Id": 6,
+        "Name": "Accesorios"
+    }
+]

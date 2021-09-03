@@ -18,10 +18,8 @@ export class CheckoutService {
   }
 
   getDeliveryMethods() {
-    // pipe so sort them
     return this.http.get(this.baseUrl + 'orders/deliveryMethods').pipe(
       map((dm: IDeliveryMethod[]) => {
-        // Highest price first
         return dm.sort((a, b) => b.price - a.price);
       })
     );

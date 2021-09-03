@@ -4,12 +4,11 @@ import { ShopComponent } from './shop.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 
 const routes: Routes = [
-  // Getting his breadcrumb from the app routing module
   { path: '', component: ShopComponent },
   {
     path: ':id',
     component: ProductDetailsComponent,
-    data: { breadcrumb: { alias: 'productDetails' } },
+    data: { breadcrumb: { alias: 'detalle' } },
   },
 ];
 

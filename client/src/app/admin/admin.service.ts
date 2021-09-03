@@ -25,8 +25,6 @@ export class AdminService {
 
   uploadImage(file: File, id: number) {
     const formData = new FormData();
-    // We are setting the filename to ‘image.png’ here as the image cropper here does not give us the ability to retain the filename,
-    // but since we are setting this on the API it doesn’t matter for our purposes.
     formData.append('photo', file, 'image.png');
     return this.http.put(this.baseUrl + 'products/' + id + '/photo', formData, {
       reportProgress: true,

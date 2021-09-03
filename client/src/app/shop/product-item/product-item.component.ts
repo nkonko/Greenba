@@ -8,7 +8,6 @@ import { BasketService } from 'src/app/basket/basket.service';
   styleUrls: ['./product-item.component.scss']
 })
 export class ProductItemComponent implements OnInit {
-  // input property (from parten to child)
   @Input() product: IProduct;
 
 

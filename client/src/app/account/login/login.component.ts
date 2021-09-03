@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../account.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
-// 189
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +10,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  // From the authGuard
   returnUrl: string;
 
   constructor(private accountService: AccountService, private router: Router, private activedRoute: ActivatedRoute ) {}
@@ -31,8 +29,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.accountService.login(this.loginForm.value).subscribe(
       () => {
-        // there comes no value back from the account service (user will be populated inside the observable)
-        console.log('user logged in');
         this.router.navigateByUrl(this.returnUrl);
       },
       (error) => console.log(error)

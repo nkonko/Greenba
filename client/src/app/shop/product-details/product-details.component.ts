@@ -23,8 +23,6 @@ export class ProductDetailsComponent implements OnInit {
     private bcService: BreadcrumbService,
     private basketService: BasketService
   ) {
-    // set it to empty so that the id of the product is not visible at the beginnen.
-    // When the page is rendered it will get the right name from the bcService.
     bcService.set('@productDetails', '');
   }
 

@@ -11,8 +11,6 @@ export class CheckoutSuccessComponent implements OnInit {
   order: IOrder;
 
   constructor(private router: Router) {
-    // Needs to be done inside the constructor.
-    // This can not been done inside the ngInit
     const navigation = this.router.getCurrentNavigation();
     const state = navigation && navigation.extras && navigation.extras.state;
     if (state) {

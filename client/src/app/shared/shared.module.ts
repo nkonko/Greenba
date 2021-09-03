@@ -32,11 +32,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
   ],
   imports: [
     CommonModule,
-    // For root so that it own providers starts at the application start
-    // Like a singleton
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
-    // they add services for inside the providers their modules, so that they can be injected
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,

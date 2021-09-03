@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../admin.service';
 import { ShopService } from 'src/app/shop/shop.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductFormValues, IProduct } from 'src/app/shared/models/product';
 import { IBrand } from 'src/app/shared/models/brand';
 import { IType } from 'src/app/shared/models/productType';

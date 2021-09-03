@@ -1,34 +1,26 @@
 <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <app-text-input [label]="'Product name'" formControlName="name"></app-text-input>
-      </div>
-      <div class="form-group col-md-6">
-        <app-text-input [label]="'Price'" [type]="'number'" formControlName="price"></app-text-input>
-      </div>
+        <div class="form-group col-md-6">
+            <app-text-input [label]="'Nombre'" formControlName="name"></app-text-input>
+        </div>
+        <div class="form-group col-md-6">
+            <app-text-input [label]="'Precio'" [type]="'number'" formControlName="price"></app-text-input>
+        </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-12">
-        <app-text-input [label]="'Description'" [type]="'textarea'" formControlName="description"></app-text-input>
-      </div>
+        <div class="form-group col-md-12">
+            <app-text-input [label]="'Descripcion'" [type]="'textarea'" formControlName="description"></app-text-input>
+        </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Types</label>
-        <app-select-dropdown 
-        formControlName="productTypeId"
-        [label]="'Types'" 
-        [Items]="types" 
-        [selectedId]="product.productTypeId"></app-select-dropdown>
-      </div>
-      <div class="form-group col-md-6">
-        <label>Brands</label>
-        <app-select-dropdown 
-        formControlName="productBrandId"
-        [label]="'Brand'" 
-        [Items]="brands" 
-        [selectedId]="product.productBrandId"></app-select-dropdown>
-      </div>
+        <div class="form-group col-md-6">
+            <label>Categorias</label>
+            <app-select-dropdown formControlName="productTypeId" [label]="'Categorias'" [Items]="types" [selectedId]="product.productTypeId"></app-select-dropdown>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Marcas</label>
+            <app-select-dropdown formControlName="productBrandId" [label]="'Marcas'" [Items]="brands" [selectedId]="product.productBrandId"></app-select-dropdown>
+        </div>
     </div>
-    <button [disabled]="editProductForm.invalid" type="submit" class="btn btn-primary my-3 float-right">Submit</button>
-  </form>
+    <button [disabled]="editProductForm.invalid" type="submit" class="btn btn-primary my-3 float-right">Enviar</button>
+</form>
