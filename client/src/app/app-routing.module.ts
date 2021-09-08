@@ -6,6 +6,7 @@ import { ServerErrorComponent } from './core/server-error/server-error.component
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
+import { ProfileModule } from './profile/profile.module';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
@@ -50,6 +51,12 @@ const routes: Routes = [
       .then(mod => mod.OrdersModule), data: { breadcrumb: 'Ordenes' }
   },
   {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./profile/profile.module')
+      .then(mod => mod.ProfileModule), data: { breadcrumb: 'Perfil' }
+  },
+  {
     path: 'account',
     loadChildren: () =>
       import('./account/account.module').then((mod) => mod.AccountModule),
@@ -67,7 +74,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    useHash: true, 
+    useHash: true,
   })],
   exports: [RouterModule]
 })

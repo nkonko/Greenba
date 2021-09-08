@@ -1,0 +1,37 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+            <div class="card card-profile shadow">
+                <div class="row justify-content-center">
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                            <img src="https://demos.creative-tim.com/argon-dashboard/assets/img/theme/team-4.jpg" class="rounded-circle">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0 pt-md-4">
+                    <div class="row" *ngIf="orders">
+                        <div class="col">
+                            <div class="card-profile-stats d-flex justify-content-center" style="margin-top: 95px;">
+                                <div>
+                                    <span *ngIf="orders.length > 0" class="heading">{{orders.length}}</span>
+                                    <span *ngIf="orders.length > 0" class="description">Ordenes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center" *ngIf="(currentUser$ | async) as user">
+                        <h3>
+                            {{(currentUser$ | async).displayName}}<span class="font-weight-light"></span>
+                        </h3>
+                        <div class="h5 font-weight-300" *ngIf="address">
+                            <i class="ni location_pin mr-2"></i>{{address.province}}, {{address.city}}
+                        </div>
+                        <hr class="my-4">
+                        <a href="#">Editar </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
