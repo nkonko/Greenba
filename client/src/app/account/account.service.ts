@@ -29,7 +29,7 @@ export class AccountService {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http.get(this.baseUrl + 'account', {headers}).pipe(
+    return this.http.get(this.baseUrl + 'account', { headers }).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
@@ -37,6 +37,17 @@ export class AccountService {
         }
       })
     );
+  }
+
+  getCurrentUser(): IUser {
+    let result: IUser;
+
+    this.currentUser$.subscribe((user: IUser) => {
+      if (user) {
+        result = user
+      }
+    })
+    return result;
   }
 
   login(values: any) {
@@ -87,7 +98,7 @@ export class AccountService {
     return this.jwtHelper.decodeToken(token).role as Array<string>;
   }
 
-  hasRole(roles: Array<string>){
+  hasRole(roles: Array<string>) {
     let hasRole = false;
     const role = this.getRoles();
 

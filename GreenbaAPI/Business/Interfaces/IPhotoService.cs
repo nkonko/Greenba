@@ -9,5 +9,7 @@ namespace Business.Interfaces
         Task<Photo> SaveToDiskAsync(IFormFile photo);
 
         void DeleteFromDisk(Photo photo);
+
+        //Task<UserPhoto> SaveUserPhotoAsync(IFormFile photo);
     }
 }

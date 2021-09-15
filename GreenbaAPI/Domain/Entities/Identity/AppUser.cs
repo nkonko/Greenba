@@ -7,5 +7,9 @@ namespace Domain.Entities.Identity
         public string DisplayName { get; set; }
 
         public Address Address { get; set; }
+
+        //public string FileName { get; set; }
+
+        //public string PictureUrl { get; set; }
     }
 }

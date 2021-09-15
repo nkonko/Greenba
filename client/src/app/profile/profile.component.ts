@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser$ = this.accountService.currentUser$;
     this.getOrders();
-    this.getAddres();
+    this.getAddress();
   }
 
   getOrders() {
@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getAddres() {
+  getAddress() {
     this.accountService.getUserAddress().subscribe((address: IAddress) => {
     this.address = address;
     }, error => {

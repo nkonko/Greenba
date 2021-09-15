@@ -37,6 +37,10 @@ namespace GreenbaAPI.Helpers
             CreateMap<Photo, PhotoDto>()
                 .ForMember(p => p.PictureUrl,
                 o => o.MapFrom<PhotoUrlResolver>());
+
+            //CreateMap<UserPhoto, ProfilePhotoDto>()
+            //    .ForMember(p => p.PictureUrl,
+            //    o => o.MapFrom<ProfilePhotoUrlResolver>());
         }
     }
 }

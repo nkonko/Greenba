@@ -17,16 +17,20 @@ namespace GreenbaAPI.Controllers
         private readonly SignInManager<AppUser> signInManager;
         private readonly ITokenService tokenService;
         private readonly IMapper mapper;
+        private readonly IPhotoService photoService;
 
         public AccountController(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            ITokenService tokenService, IMapper mapper)
+            ITokenService tokenService,
+            IMapper mapper,
+            IPhotoService photoService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.tokenService = tokenService;
             this.mapper = mapper;
+            this.photoService = photoService;
         }
 
         [Authorize]
@@ -38,7 +42,7 @@ namespace GreenbaAPI.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = await tokenService .CreateToken(user),
+                Token = await tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
             };
         }
@@ -139,5 +143,34 @@ namespace GreenbaAPI.Controllers
             };
         }
 
+        //[HttpPost("userphoto")]
+        //public async Task<ActionResult<UserDto>> AddUserPhoto([FromForm] UserPhotoDto photoDto)
+        //{
+        //    var user = await userManager.FindByEmailFromClaimsPrinciple(HttpContext.User);
+
+        //    if (photoDto.Photo.Length > 0)
+        //    {
+        //        var photo = await photoService.SaveUserPhotoAsync(photoDto.Photo);
+
+        //        if (photo != null)
+        //        {
+        //            user.FileName = photo.FileName;
+        //            user.PictureUrl = photo.PictureUrl;
+
+        //            var result = await userManager.UpdateAsync(user);
+
+        //            if (result.Succeeded)
+        //            {
+        //                return Ok(new UserDto { DisplayName = user.DisplayName });
+        //            }
+        //            else
+        //            {
+        //                return BadRequest(new ApiResponse(400, "Problema al añadir foto"));
+        //            }
+        //        }
+        //    }
+
+        //    return BadRequest(new ApiResponse(400, "problema guardando foto "));
+        //}
     }
 }
