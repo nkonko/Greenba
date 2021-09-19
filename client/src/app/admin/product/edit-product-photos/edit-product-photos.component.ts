@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IProduct } from 'src/app/shared/models/product';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { AdminService } from '../admin.service';
+import { AdminService } from '../../admin.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

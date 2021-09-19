@@ -10,6 +10,7 @@ using GreenbaAPI.Dtos;
 using GreenbaAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Source.Repository.Interfaces;
 
 namespace GreenbaAPI.Controllers
@@ -19,12 +20,14 @@ namespace GreenbaAPI.Controllers
         private readonly IUnitOfWork unitOfWork;
         private readonly IPhotoService photoService;
         private readonly IMapper mapper;
+        private readonly ILogger<ProductsController> logger;
 
-        public ProductsController(IUnitOfWork unitOfWork, IPhotoService photoService, IMapper mapper)
+        public ProductsController(IUnitOfWork unitOfWork, IPhotoService photoService, IMapper mapper, ILogger<ProductsController> logger)
         {
             this.unitOfWork = unitOfWork;
             this.photoService = photoService;
             this.mapper = mapper;
+            this.logger = logger;
         }
 
         //[Cached(600)]
@@ -48,6 +51,7 @@ namespace GreenbaAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
+            logger.LogError("Hello World");
             var spec = new ProductSpecification(id);
 
             var product = await unitOfWork.Repository<Product>().GetEntityWithSpec(spec);

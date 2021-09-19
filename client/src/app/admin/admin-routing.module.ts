@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
-import { EditProductComponent } from './edit-product/edit-product.component';
+import { LogsComponent } from './logs/logs/logs.component';
+import { EditProductComponent } from './product/edit-product/edit-product.component';
 
 const routes: Routes = [
   {path: '', component: AdminComponent},
   {path: 'create', component: EditProductComponent, data: {breadcrumb: 'Crear'}},
   {path: 'edit/:id', component: EditProductComponent, data: {breadcrumb: 'Editar'}},
+  {path: 'logs', component: LogsComponent, data: {breadcrumb: 'Bitacora'}},
 ];
 
 @NgModule({

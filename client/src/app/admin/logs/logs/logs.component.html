@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover" style="cursor: pointer;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Mensaje</th>
+                        <th>Fecha</th>
+                        <th>Excepcion</th>
+                        <th>Nivel</th>
+                        <th>Componente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let log of logs" routerLink="/logs/{{log.id}}">
+                        <th># {{log.id}}</th>
+                        <td>{{log.message}}</td>
+                        <td>{{log.logDate | date: 'medium'}}</td>
+                        <td>{{log.exception}}</td>
+                        <td>{{log.level}}</td>
+                        <td>{{log.application}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

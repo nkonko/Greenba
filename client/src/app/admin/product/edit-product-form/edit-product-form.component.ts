@@ -3,7 +3,7 @@ import { ProductFormValues } from 'src/app/shared/models/product';
 import { IBrand } from 'src/app/shared/models/brand';
 import { IType } from 'src/app/shared/models/productType';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdminService } from '../admin.service';
+import { AdminService } from '../../admin.service';
 import {
   FormGroup,
   FormControl,
