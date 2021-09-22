@@ -18,7 +18,6 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { PhotoWidgetComponent } from './components/photo-widget/photo-widget.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { TableComponent } from './components/table/table.component';
     BasketSummaryComponent,
     SelectDropdownComponent,
     PhotoWidgetComponent,
-    TableComponent,
   ],
   imports: [
     CommonModule,
