@@ -1,8 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="nlog.config" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -12,10 +16,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Serilog" Version="2.10.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
-    <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
-    <PackageReference Include="Serilog.Sinks.PostgreSQL.Configuration" Version="1.0.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+	<PackageReference Include="NLog" Version="4.7.*" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.5" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.5" />
   </ItemGroup>
@@ -41,6 +43,9 @@
 	<Content Include="images\products\sb-core2.png" />
 	<Content Include="images\products\sb-react1.png" />
 	<Content Include="images\products\sb-ts1.png" />
+	<None Include="nlog.config">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
     <ProjectReference Include="..\Business\Business.csproj" />
     <ProjectReference Include="..\Source\Source.csproj" />
   </ItemGroup>

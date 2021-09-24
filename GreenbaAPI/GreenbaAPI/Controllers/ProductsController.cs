@@ -51,7 +51,6 @@ namespace GreenbaAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
-            logger.LogError("Hello World");
             var spec = new ProductSpecification(id);
 
             var product = await unitOfWork.Repository<Product>().GetEntityWithSpec(spec);
