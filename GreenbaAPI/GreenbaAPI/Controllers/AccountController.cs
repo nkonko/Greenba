@@ -8,6 +8,7 @@ using GreenbaAPI.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace GreenbaAPI.Controllers
 {
@@ -18,19 +19,22 @@ namespace GreenbaAPI.Controllers
         private readonly ITokenService tokenService;
         private readonly IMapper mapper;
         private readonly IPhotoService photoService;
+        private readonly ILogger<AccountController> logger;
 
         public AccountController(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             ITokenService tokenService,
             IMapper mapper,
-            IPhotoService photoService)
+            IPhotoService photoService,
+            ILogger<AccountController> logger)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.tokenService = tokenService;
             this.mapper = mapper;
             this.photoService = photoService;
+            this.logger = logger;
         }
 
         [Authorize]
@@ -87,6 +91,7 @@ namespace GreenbaAPI.Controllers
 
             if (user == null)
             {
+                logger.LogError("Unautorized",user);
                 return Unauthorized(new ApiResponse(401));
             }
 
@@ -94,6 +99,7 @@ namespace GreenbaAPI.Controllers
 
             if (!result.Succeeded)
             {
+                logger.LogError("Unautorized", user);
                 return Unauthorized(new ApiResponse(401));
             }
 
@@ -110,6 +116,7 @@ namespace GreenbaAPI.Controllers
         {
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
+                logger.LogError("El email esta en uso", registerDto.Email);
                 return new BadRequestObjectResult(
                     new ApiValidationErrorResponse { Errors = new[] { "El Email esta en uso" } });
             }

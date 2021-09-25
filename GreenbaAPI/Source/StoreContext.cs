@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Domain;
+using Domain.Entities;
 using Domain.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -25,6 +26,8 @@ namespace Source
         public DbSet<OrderItem> OrderItems { get; set; }
 
         public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+
+        public DbSet<Log> Logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
