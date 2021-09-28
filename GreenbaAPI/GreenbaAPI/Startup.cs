@@ -1,8 +1,11 @@
 using System.IO;
+using Bussines;
+using Domain.Entities.Email;
 using GreenbaAPI.Extensions;
 using GreenbaAPI.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +44,14 @@ namespace GreenbaAPI
                 return ConnectionMultiplexer.Connect(config);
             });
 
+            services.AddTransient<IEmailSender, SendGridEmailSender>();
+            services.Configure<SendGridEmailSenderOptions>(options =>
+            {
+                options.ApiKey = configuration["ExternalProviders:SendGrid:ApiKey"];
+                options.SenderEmail = configuration["ExternalProviders:SendGrid:SenderEmail"];
+                options.SenderName = configuration["ExternalProviders:SendGrid:SenderName"];
+            });
+
             services.AddApplicationServices();
             services.AddIdentityServices(configuration);
 
@@ -75,6 +86,8 @@ namespace GreenbaAPI
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https//localhost:4200");
                 });
             });
+
+            services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
