@@ -1,10 +1,23 @@
-<div class="container mt-5">
+<div class="container mt-3">
     <div class="row">
+        <div class="col-3">
+            <h3 class="text-warning">Filtros</h3>
+            <div class="mt-4">
+                <h4 class="text-warning">Orden criticidad</h4>
+                <select class="custom-select mb-3 mb-4" (change)="onSortSelected($event.target.value)">
+                    <option *ngFor="let level of levelOptions" [selected]="logParams.sort === level.value"
+                        [value]="level.value">{{ level.name }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
         <div class="col-12">
             <table class="table table-hover" style="cursor: pointer;">
                 <thead class="thead-light">
                     <tr>
-                        <th>Id</th>
+                        <th>#</th>
                         <th>Mensaje</th>
                         <th>Fecha</th>
                         <th>Excepcion</th>
@@ -13,16 +26,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let log of logs" routerLink="/logs/{{log.id}}">
-                        <th># {{log.id}}</th>
-                        <td>{{log.message}}</td>
-                        <td>{{log.logDate | date: 'medium'}}</td>
-                        <td>{{log.exception}}</td>
+                    <tr *ngFor="let log of logs" routerLink="{{log.id}}">
+                        <th>{{log.id}}</th>
+                        <td>{{log.message | slice:0:30}}</td>
+                        <td>{{log.logged | slice:0:10}}</td>
+                        <td>{{log.exception | slice:0:65}}</td>
                         <td>{{log.level}}</td>
-                        <td>{{log.application}}</td>
+                        <td>{{log.logger}}</td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="d-flex justify-content-center">
+                <app-pager [pageSize]="logParams.pageSize" [totalCount]="10" [pageNumber]="logParams.pageNumber" (pageChanged)="onPageChanged($event)"></app-pager>
+            </div>
         </div>
     </div>
 </div>

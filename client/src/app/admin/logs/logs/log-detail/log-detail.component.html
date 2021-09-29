@@ -1,0 +1,19 @@
+<div class="container mt-5" *ngIf="log">
+    <div class="row">
+        <div class="col-12">
+            <h3>Log n°: {{log.id}}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h4>Mensaje</h4>
+            <p>{{log.message | slice:0:130}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 ml-3">
+            <h4>Exepcion</h4>
+            <p>{{log.exception}}</p>
+        </div>
+    </div>
+</div>

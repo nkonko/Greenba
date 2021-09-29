@@ -24,5 +24,9 @@ namespace Domain.Specification
                 }
             }
         }
+
+        public LogsSpecification(int id) : base(x => x.Id == id)
+        {
+        }
     }
 }

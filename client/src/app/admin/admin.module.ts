@@ -7,11 +7,12 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { EditProductFormComponent } from './product/edit-product-form/edit-product-form.component';
 import { EditProductPhotosComponent } from './product/edit-product-photos/edit-product-photos.component';
 import { LogsComponent } from './logs/logs/logs.component';
+import { LogDetailComponent } from './logs/logs/log-detail/log-detail.component';
 
 
 
 @NgModule({
-  declarations: [AdminComponent, EditProductComponent, EditProductFormComponent, EditProductPhotosComponent, LogsComponent],
+  declarations: [AdminComponent, EditProductComponent, EditProductFormComponent, EditProductPhotosComponent, LogsComponent, LogDetailComponent],
   imports: [
     CommonModule,
     SharedModule,

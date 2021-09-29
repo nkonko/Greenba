@@ -1,8 +1,8 @@
 export interface ILog {
     id: number;
     message: string;
-    logDate: string;
+    logged: string;
     exception: string;
     level: string;
-    application: string;
+    logger: string;
 }

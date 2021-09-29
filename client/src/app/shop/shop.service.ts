@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { IPagination, Pagination } from '../shared/models/pagination';
+import { IProductPagination, ProductPagination } from '../shared/models/productPagination';
 import { IBrand } from '../shared/models/brand';
 import { IType } from '../shared/models/productType';
 import { map } from 'rxjs/operators';
@@ -18,10 +18,11 @@ export class ShopService {
   products: IProduct[] = [];
   brands: IBrand[] = [];
   types: IType[] = [];
-  pagination = new Pagination();
+  pagination = new ProductPagination();
   shopParams = new ShopParams();
 
   constructor(private http: HttpClient) {}
+  
   getProducts(useCache: boolean) {
     if (!useCache) {
       this.products = [];
@@ -57,7 +58,7 @@ export class ShopService {
     params = params.append('pageSize', this.shopParams.pageSize.toString());
 
     return this.http
-      .get<IPagination>(this.baseUrl + 'products', {
+      .get<IProductPagination>(this.baseUrl + 'products', {
         observe: 'response',
         params,
       })

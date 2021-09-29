@@ -4,13 +4,9 @@
             <ng-container *ngIf="types && brands">
                 <h5 class="text-warning ml-3 mt-4 mb-3">Ordenar</h5>
                 <select class="custom-select mb-3 mb-4" (change)="onSortSelected($event.target.value)">
-          <option
-            *ngFor="let sort of sortOptions"
-            [selected]="shopParams.sort === sort.value"
-            [value]="sort.value"
-            >{{ sort.name }}</option
-          >
-        </select>
+                    <option *ngFor="let sort of sortOptions" [selected]="shopParams.sort === sort.value"
+                        [value]="sort.value">{{ sort.name }}</option>
+                </select>
 
                 <h5 class="text-warning ml-3">Marcas</h5>
                 <ul class="list-group my-3">
@@ -33,11 +29,11 @@
                 <div class="form-inline" *ngIf="products">
                     <input (keyup.enter)="onSearch()" #search class="form-control mr-2" style="width: 300px;" placeholder="Buscar" type="text" />
                     <button (click)="onSearch()" class="btn btn-outline-primary my-2">
-            Buscar
-          </button>
+                        Buscar
+                    </button>
                     <button (click)="onReset()" class="btn btn-outline-success ml-2 my-2">
-            Borrar
-          </button>
+                        Borrar
+                    </button>
                 </div>
             </div>
 
