@@ -1,5 +1,6 @@
 ﻿using Domain.Entities.Email;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -9,21 +10,24 @@ namespace Bussines
 {
     public class SendGridEmailSender : IEmailSender
     {
-        public SendGridEmailSender(
-            IOptions<SendGridEmailSenderOptions> options
-            )
+        private readonly ILogger<SendGridEmailSender> logger;
+
+        public SendGridEmailSender(IOptions<SendGridEmailSenderOptions> options, ILogger<SendGridEmailSender> logger)
         {
-            this.Options = options.Value;
+            Options = options.Value;
+            this.logger = logger;
         }
 
         public SendGridEmailSenderOptions Options { get; set; }
 
-        public async Task SendEmailAsync(
-            string email,
-            string subject,
-            string message)
+        public async Task SendEmailAsync(string email, string subject, string message)
         {
-            await Execute(Options.ApiKey, subject, message, email);
+            var response = await Execute(Options.ApiKey, subject, message, email);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                logger.LogError(response.Body.ReadAsStringAsync().Result);
+            }
         }
 
         private async Task<Response> Execute(
@@ -42,8 +46,6 @@ namespace Bussines
             };
             msg.AddTo(new EmailAddress(email));
 
-            // disable tracking settings
-            // ref.: https://sendgrid.com/docs/User_Guide/Settings/tracking.html
             msg.SetClickTracking(false, false);
             msg.SetOpenTracking(false);
             msg.SetGoogleAnalytics(false);

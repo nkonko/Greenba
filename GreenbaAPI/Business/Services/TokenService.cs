@@ -9,20 +9,23 @@ using Business.Interfaces;
 using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Business
+namespace Business.Services
 {
     public class TokenService : ITokenService
     {
         private readonly IConfiguration configuration;
         private readonly UserManager<AppUser> userManager;
+        private readonly ILogger<TokenService> logger;
         private readonly SymmetricSecurityKey key;
 
-        public TokenService(IConfiguration configuration, UserManager<AppUser> userManager)
+        public TokenService(IConfiguration configuration, UserManager<AppUser> userManager, ILogger<TokenService> logger)
         {
             this.configuration = configuration;
             this.userManager = userManager;
+            this.logger = logger;
             key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:Key"]));
         }
 
@@ -53,6 +56,33 @@ namespace Business
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+
+        public bool ValidateToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var issuer = configuration["Token:Issuer"];
+            var parameters = new TokenValidationParameters()
+            {
+                ValidateLifetime = true,
+                ValidateAudience = false,
+                ValidateIssuer = true,
+                ValidIssuer = issuer,
+                IssuerSigningKey = key,
+                ValidateIssuerSigningKey = true
+            };
+
+            try
+            {
+                tokenHandler.ValidateToken(token, parameters, out var validatedToken);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Invalid token", e);
+                return false;
+            }
         }
     }
 }

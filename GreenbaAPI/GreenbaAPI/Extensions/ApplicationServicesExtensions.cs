@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using API.Errors;
-using Business;
+using Business.Email;
 using Business.Interfaces;
+using Business.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Source.Cache;
@@ -20,11 +21,14 @@ namespace GreenbaAPI.Extensions
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IBasketRepository, BasketRepository>();
+
+            services.AddScoped<IEmailBuilder, EmailBuilder>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

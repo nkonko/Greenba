@@ -7,7 +7,7 @@ using Domain.Entities.OrderAggregate;
 using Domain.Specification;
 using Source.Repository.Interfaces;
 
-namespace Business
+namespace Business.Services
 {
     public class OrderService : IOrderService
     {

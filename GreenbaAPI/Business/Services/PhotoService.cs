@@ -5,7 +5,7 @@ using Business.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 
-namespace Business
+namespace Business.Services
 {
     public class PhotoService : IPhotoService
     {

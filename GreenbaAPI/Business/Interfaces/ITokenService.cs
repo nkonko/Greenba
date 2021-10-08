@@ -6,5 +6,7 @@ namespace Business.Interfaces
     public interface ITokenService
     {
         Task<string> CreateToken(AppUser user);
+
+        bool ValidateToken(string token);
     }
 }

@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using API.Errors;
 using AutoMapper;
 using Business.Interfaces;
@@ -7,8 +10,12 @@ using GreenbaAPI.Dtos;
 using GreenbaAPI.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace GreenbaAPI.Controllers
 {
@@ -20,6 +27,7 @@ namespace GreenbaAPI.Controllers
         private readonly IMapper mapper;
         private readonly IPhotoService photoService;
         private readonly ILogger<AccountController> logger;
+        private readonly IEmailService emailService;
 
         public AccountController(
             UserManager<AppUser> userManager,
@@ -27,7 +35,8 @@ namespace GreenbaAPI.Controllers
             ITokenService tokenService,
             IMapper mapper,
             IPhotoService photoService,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            IEmailService emailService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -35,6 +44,7 @@ namespace GreenbaAPI.Controllers
             this.mapper = mapper;
             this.photoService = photoService;
             this.logger = logger;
+            this.emailService = emailService;
         }
 
         [Authorize]
@@ -111,42 +121,85 @@ namespace GreenbaAPI.Controllers
             };
         }
 
+        [HttpPut("activate")]
+        public ActionResult<UserDto> Activate(Guid userId)
+        {
+            return Ok();
+        }
+
+        //[HttpPut("deactivate")]
+        //public async Task<ActionResult<UserDto>> Deactivate(RegisterDto registerDto)
+        //{
+
+        //}
+
+        //[HttpPut("forgotPassword")]
+        //public async Task<ActionResult<UserDto>> ForgotPassword(RegisterDto registerDto)
+        //{
+
+        //}
+
+        [HttpGet("validateToken")]
+        public ActionResult<ValidationResponseDto> ValidateToken(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest("El link es invalido"); ;
+            }
+
+            var result = tokenService.ValidateToken(token);
+
+            if (!result)
+            {
+                logger.LogError("Invalid Token");
+                return new ValidationResponseDto() { ValidToken = false };
+            }
+
+            return new ValidationResponseDto() { ValidToken = true };
+        }
+
+
+
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
-            {
-                logger.LogError("El email esta en uso", registerDto.Email);
-                return new BadRequestObjectResult(
-                    new ApiValidationErrorResponse { Errors = new[] { "El Email esta en uso" } });
-            }
+            //if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
+            //{
+            //    logger.LogError("El email esta en uso", registerDto.Email);
+            //    return new BadRequestObjectResult(
+            //        new ApiValidationErrorResponse { Errors = new[] { "El Email esta en uso" } });
+            //}
 
-            var user = new AppUser
-            {
-                DisplayName = registerDto.DisplayName,
-                Email = registerDto.Email,
-                UserName = registerDto.Email
-            };
+            //var user = new AppUser
+            //{
+            //    DisplayName = registerDto.DisplayName,
+            //    Email = registerDto.Email,
+            //    UserName = registerDto.Email
+            //};
 
-            var result = await userManager.CreateAsync(user, registerDto.Password);
+            //var result = await userManager.CreateAsync(user, registerDto.Password);
 
-            if (!result.Succeeded)
-            {
-                return BadRequest(new ApiResponse(400));
-            }
+            //if (!result.Succeeded)
+            //{
+            //    return BadRequest(new ApiResponse(400));
+            //}
 
-            var roleAddResult = await userManager.AddToRoleAsync(user, "Member");
+            //var roleAddResult = await userManager.AddToRoleAsync(user, "Member");
 
-            if (roleAddResult.Succeeded)
-            {
-                return BadRequest("Failed to add to role");
-            }
+            //if (roleAddResult.Succeeded)
+            //{
+            //    return BadRequest("Failed to add to role");
+            //}
+
+            //var token = await tokenService.CreateToken(user);
+
+            await emailService.SendUserActivationEmail(registerDto.Email);
 
             return new UserDto
             {
-                DisplayName = user.DisplayName,
-                Token = await tokenService.CreateToken(user),
-                Email = user.Email
+                //DisplayName = user.DisplayName,
+                //Token = await tokenService.CreateToken(user),
+                //Email = user.Email
             };
         }
 

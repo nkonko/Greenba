@@ -24,9 +24,12 @@ namespace GreenbaAPI.Controllers
 
             var logs = await unitOfWork.Repository<Log>().ListAsync(spec);
 
-            return Ok(new Pagination<Log>(logsParams.PageIndex, logsParams.PageSize, 10, logs));
-        }
+            var countSpec = new LogsFiltersCountSpecification(logsParams);
 
+            var totalItems = await unitOfWork.Repository<Log>().CountAsync(countSpec);
+
+            return Ok(new Pagination<Log>(logsParams.PageIndex, logsParams.PageSize, totalItems, logs));
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Log>> GetLog(int id)
