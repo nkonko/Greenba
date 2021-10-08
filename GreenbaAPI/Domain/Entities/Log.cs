@@ -1,8 +1,10 @@
-﻿namespace Domain.Entities
+﻿using System;
+
+namespace Domain.Entities
 {
     public class Log : BaseEntity
     {
-        public string Logged { get; set; }
+        public DateTime Logged { get; set; }
 
         public string Level { get; set; }
 

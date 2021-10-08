@@ -8,6 +8,7 @@
             (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
             (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId))
         {
+
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
             AddInclude(x => x.Photos);

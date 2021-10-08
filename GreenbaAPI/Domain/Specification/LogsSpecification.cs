@@ -1,28 +1,20 @@
-﻿using Domain.Entities;
+﻿using Ardalis.Specification;
+using Domain.Entities;
 
 namespace Domain.Specification
 {
     public class LogsSpecification : BaseSpecification<Log>
     {
-        public LogsSpecification(LogsSpecParams logsParams)
+        public LogsSpecification(LogsSpecParams logsParams):
+            base(x =>
+            (logsParams.DateFrom.HasValue && logsParams.DateTo.HasValue &&
+            x.Logged >= logsParams.DateFrom.Value && x.Logged <= logsParams.DateTo.Value) ||
+            (logsParams.DateFrom.HasValue && !logsParams.DateTo.HasValue &&
+            x.Logged >= logsParams.DateFrom.Value) ||
+            (!logsParams.DateFrom.HasValue && logsParams.DateTo.HasValue &&
+            x.Logged <= logsParams.DateTo.Value)
+            )
         {
-            ApplyPaging(logsParams.PageSize * (logsParams.PageIndex - 1), logsParams.PageSize);
-
-            if (!string.IsNullOrEmpty(logsParams.Sort))
-            {
-                switch (logsParams.Sort)
-                {
-                    case "levelAsc":
-                        AddOrderBy(p => p.Level);
-                        break;
-                    case "levelDesc":
-                        AddOrderByDesc(p => p.Level);
-                        break;
-                    default:
-                        AddOrderBy(p => p.Id);
-                        break;
-                }
-            }
         }
 
         public LogsSpecification(int id) : base(x => x.Id == id)

@@ -27,8 +27,9 @@ namespace GreenbaAPI.Controllers
             return Ok(new Pagination<Log>(logsParams.PageIndex, logsParams.PageSize, 10, logs));
         }
 
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Log>> GetProduct(int id)
+        public async Task<ActionResult<Log>> GetLog(int id)
         {
             var spec = new LogsSpecification(id);
 
