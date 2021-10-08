@@ -8,11 +8,17 @@ namespace Domain.Specification
 
         public DateTime? DateFrom { get; set; }
 
+        public string Level { get; set; }
+
+        public string Search { get => search; set => search = value.ToLower(); }
+
+        private string search;
+
         public int PageIndex { get; set; } = 1;
 
         public int PageSize { get => pageSize; set => pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
 
-        public string Sort { get; set; }
+        public string Sort { get; set; } = "Newest";
 
         private const int MaxPageSize = 50;
 
