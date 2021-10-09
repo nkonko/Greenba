@@ -17,15 +17,21 @@ namespace Business.Services
             this.emailBuilder = emailBuilder;
         }
 
-        public async Task SendUserActivationEmail(string email)
+        public async Task SendUserActivationEmail(string email, string token)
         {
             var html = File.ReadAllText(Path.GetFullPath("Templates\\ActivateUser.html"));
             var replacements = new Dictionary<string, string>();
-            replacements.Add("[Link]", "www.google.com");
+
+            replacements.Add("[Link]", $"activate?Token={token}");
 
             var template = emailBuilder.Build(html, replacements);
 
             await emailSender.SendEmailAsync(email, "Activate user", template);
+        }
+
+        public Task SendUserForgotPasswordEmail(string email)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

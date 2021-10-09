@@ -8,6 +8,8 @@ namespace Domain.Entities.Identity
 
         public Address Address { get; set; }
 
+        public bool Active { get; set; }
+
         //public string FileName { get; set; }
 
         //public string PictureUrl { get; set; }

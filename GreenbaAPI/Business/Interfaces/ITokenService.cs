@@ -7,6 +7,6 @@ namespace Business.Interfaces
     {
         Task<string> CreateToken(AppUser user);
 
-        bool ValidateToken(string token);
+        bool ValidateToken(string token, out string userName);
     }
 }

@@ -58,7 +58,7 @@ namespace Business.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public bool ValidateToken(string token)
+        public bool ValidateToken(string token, out string userName)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var issuer = configuration["Token:Issuer"];
@@ -75,12 +75,14 @@ namespace Business.Services
             try
             {
                 tokenHandler.ValidateToken(token, parameters, out var validatedToken);
-
+                var securityToken = new JwtSecurityToken(token);
+                userName = securityToken.Claims.FirstOrDefault(c => c.Type == "email").Value;
                 return true;
             }
             catch (Exception e)
             {
                 logger.LogError("Invalid token", e);
+                userName = string.Empty;
                 return false;
             }
         }
