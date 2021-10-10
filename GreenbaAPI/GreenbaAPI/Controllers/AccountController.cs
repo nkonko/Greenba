@@ -126,9 +126,16 @@ namespace GreenbaAPI.Controllers
         {
             var user = await userManager.FindByEmailAsync(request.UserName);
 
+            var passwordValid = userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash, request.OldPassword);
+
+            if (passwordValid == PasswordVerificationResult.Failed)
+            {
+                return BadRequest("Datos invalidos");
+            }
+
             if (user == null)
             {
-                return BadRequest("Invalid request");
+                return BadRequest("Datos invalidos");
             }
 
             user.Active = true;
@@ -136,7 +143,7 @@ namespace GreenbaAPI.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest("Invalid request");
+                return BadRequest("Datos invalidos");
             }
 
             return Ok(user);
@@ -158,7 +165,7 @@ namespace GreenbaAPI.Controllers
 
             if (!result.Succeeded)
             {
-                return NotFound("User not found");
+                return NotFound("User no encontrado");
             }
 
             return Ok(user);
@@ -171,12 +178,48 @@ namespace GreenbaAPI.Controllers
 
             if (user == null)
             {
-                return BadRequest("User doesn't exist");
+                return BadRequest("El usuario no existe");
             }
+
+            if (!user.Active)
+            {
+                return BadRequest("El usuario no esta activo");
+            }
+
+            await emailService.SendUserForgotPasswordEmail(user.Email);
+            return Ok();
+        }
+
+        [HttpPut("changePassword")]
+        public async Task<ActionResult<UserDto>> ChangePassword(string userName, string password, string confirmPassword)
+        {
+            if (!string.IsNullOrEmpty(password) &&
+                !string.IsNullOrEmpty(confirmPassword) &&
+                !string.IsNullOrEmpty(userName) &&
+                string.Equals(password, confirmPassword))
+            {
+                var user = await userManager.FindByEmailAsync(userName);
+
+                if (user == null)
+                {
+                    return BadRequest("El usuario no existe");
+                }
+
+                if (!user.Active)
+                {
+                    return BadRequest("El usuario no esta activo");
+                }
+
+                await userManager.RemovePasswordAsync(user);
+                await userManager.AddPasswordAsync(user, password);
+                return Ok(user);
+            }
+
+            return BadRequest("Hubo un problema cambiando su password");
         }
 
         [HttpGet("validateToken")]
-        public ActionResult<ValidationResponseDto> ValidateToken(string token)
+        public ActionResult<ValidationResponseDto> ValidateToken([FromQuery] string token)
         {
             if (string.IsNullOrEmpty(token))
             {
@@ -221,20 +264,20 @@ namespace GreenbaAPI.Controllers
 
             var roleAddResult = await userManager.AddToRoleAsync(user, "Member");
 
-            if (roleAddResult.Succeeded)
+            if (!roleAddResult.Succeeded)
             {
-                return BadRequest("Failed to add to role");
+                return BadRequest("Problema agregando el rol, revise los datos");
             }
 
             var token = await tokenService.CreateToken(user);
 
-            await emailService.SendUserActivationEmail(registerDto.Email);
+            await emailService.SendUserActivationEmail(registerDto.DisplayName, registerDto.Email, token);
 
             return new UserDto
             {
-                //DisplayName = user.DisplayName,
-                //Token = await tokenService.CreateToken(user),
-                //Email = user.Email
+                DisplayName = user.DisplayName,
+                Token = await tokenService.CreateToken(user),
+                Email = user.Email
             };
         }
 

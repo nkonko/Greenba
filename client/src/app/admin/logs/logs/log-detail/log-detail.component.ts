@@ -13,7 +13,7 @@ export class LogDetailComponent implements OnInit {
 
   constructor(
     private logService: LogService,
-    private activatedRoute: ActivatedRoute,) { }
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadLog();

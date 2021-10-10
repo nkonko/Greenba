@@ -8,6 +8,9 @@ namespace Business.Services
 {
     public class EmailService : IEmailService
     {
+        private const string ActivateUserTemplate = "Templates\\ActivateUser.html";
+        private const string ForgotPasswordTemplate = "Templates\\ForgotPassword.html";
+
         private readonly IEmailSender emailSender;
         private readonly IEmailBuilder emailBuilder;
 
@@ -17,21 +20,30 @@ namespace Business.Services
             this.emailBuilder = emailBuilder;
         }
 
-        public async Task SendUserActivationEmail(string email, string token)
+        public async Task SendUserActivationEmail(string displayName, string email, string token)
         {
-            var html = File.ReadAllText(Path.GetFullPath("Templates\\ActivateUser.html"));
             var replacements = new Dictionary<string, string>();
+            replacements.Add("[Link]", $"localhost:4200/#/account/validate?Token={token}");
+            replacements.Add("[User]", displayName);
 
-            replacements.Add("[Link]", $"activate?Token={token}");
-
-            var template = emailBuilder.Build(html, replacements);
+            var template = GetTemplate(File.ReadAllText(Path.GetFullPath(ActivateUserTemplate)), replacements);
 
             await emailSender.SendEmailAsync(email, "Activate user", template);
         }
 
-        public Task SendUserForgotPasswordEmail(string email)
+        public async Task SendUserForgotPasswordEmail(string email)
         {
-            throw new System.NotImplementedException();
+            var replacements = new Dictionary<string, string>();
+            replacements.Add("[Link]", "forgotPassword");
+
+            var template = GetTemplate(File.ReadAllText(Path.GetFullPath(ForgotPasswordTemplate)), replacements);
+
+            await emailSender.SendEmailAsync(email, "Forgot password", template);
+        }
+
+        private string GetTemplate(string htmlFile, Dictionary<string, string> replacements)
+        {
+            return emailBuilder.Build(htmlFile, replacements);
         }
     }
 }

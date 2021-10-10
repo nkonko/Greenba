@@ -113,4 +113,8 @@ export class AccountService {
     console.log('hasRole', hasRole);
     return hasRole;
   }
+
+  validateToken(token: string){
+    return this.http.get(this.baseUrl + 'account/validateToken?token=' + token);
+  }
 }
