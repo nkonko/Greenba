@@ -117,4 +117,14 @@ export class AccountService {
   validateToken(token: string){
     return this.http.get(this.baseUrl + 'account/validateToken?token=' + token);
   }
+
+  activateUser(values: any)
+  {
+    return this.http.put(this.baseUrl + 'account/activate', values);
+  }
+
+  deactivateUser(userName: string)
+  {
+    return this.http.put(this.baseUrl + 'account/deactivate', userName);
+  }
 }
