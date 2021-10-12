@@ -191,14 +191,14 @@ namespace GreenbaAPI.Controllers
         }
 
         [HttpPut("changePassword")]
-        public async Task<ActionResult<UserDto>> ChangePassword(string userName, string password, string confirmPassword)
+        public async Task<ActionResult<UserDto>> ChangePassword(ChangePasswordDto changePasswordDto)
         {
-            if (!string.IsNullOrEmpty(password) &&
-                !string.IsNullOrEmpty(confirmPassword) &&
-                !string.IsNullOrEmpty(userName) &&
-                string.Equals(password, confirmPassword))
+            if (!string.IsNullOrEmpty(changePasswordDto.Password) &&
+                !string.IsNullOrEmpty(changePasswordDto.ConfirmPassword) &&
+                !string.IsNullOrEmpty(changePasswordDto.UserName) &&
+                string.Equals(changePasswordDto.Password, changePasswordDto.ConfirmPassword))
             {
-                var user = await userManager.FindByEmailAsync(userName);
+                var user = await userManager.FindByEmailAsync(changePasswordDto.UserName);
 
                 if (user == null)
                 {
@@ -211,7 +211,7 @@ namespace GreenbaAPI.Controllers
                 }
 
                 await userManager.RemovePasswordAsync(user);
-                await userManager.AddPasswordAsync(user, password);
+                await userManager.AddPasswordAsync(user, changePasswordDto.Password);
                 return Ok(user);
             }
 

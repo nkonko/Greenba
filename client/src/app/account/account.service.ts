@@ -127,4 +127,14 @@ export class AccountService {
   {
     return this.http.put(this.baseUrl + 'account/deactivate', userName);
   }
+
+  forgotPassword(userName: string)
+  {
+    return this.http.put(this.baseUrl + 'account/forgotPassword', userName);
+  }
+
+  changePassword(values: any)
+  {
+    return this.http.put(this.baseUrl + 'account/changePassword', values);
+  }
 }
