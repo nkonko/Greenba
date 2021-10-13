@@ -18,6 +18,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { PhotoWidgetComponent } from './components/photo-widget/photo-widget.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     BasketSummaryComponent,
     SelectDropdownComponent,
     PhotoWidgetComponent,
+    DatepickerComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +47,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     TabsModule.forRoot(),
     NgxDropzoneModule,
     ImageCropperModule,
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
   ],
   exports: [
     PaginationModule,
@@ -64,6 +70,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     NgxDropzoneModule,
     ImageCropperModule,
     PhotoWidgetComponent,
+    DatepickerComponent
   ],
 })
 export class SharedModule {}

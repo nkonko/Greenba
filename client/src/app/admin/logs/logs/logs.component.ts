@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ILog } from '../../../shared/models/log';
 import { LogService } from '../log.service';
 import { LogParams } from '../../../shared/models/logParams';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-logs',
@@ -9,6 +10,8 @@ import { LogParams } from '../../../shared/models/logParams';
   styleUrls: ['./logs.component.scss']
 })
 export class LogsComponent implements OnInit {
+  logForm: FormGroup;
+
   logs: ILog[];
   logParams: LogParams;
   levelOptions = [
@@ -22,12 +25,13 @@ export class LogsComponent implements OnInit {
     {name: 'Alta', value: 'error'}
   ]
   
-  constructor(private logService: LogService) { 
+  constructor(private logService: LogService, private fb: FormBuilder) { 
     this.logParams = this.logService.getLogParams();
   }
 
   ngOnInit(): void {
     this.getLogs();
+    this.createForm();
   }
 
   getLogs() {
@@ -52,6 +56,12 @@ export class LogsComponent implements OnInit {
       this.logService.getLogParams();
       this.getLogs();
   }
+}
+
+createForm() {
+this.logForm = this.fb.group({
+  date:[null, Validators.required]
+})
 }
 
 }

@@ -8,6 +8,11 @@
                     <option *ngFor="let level of levelOptions" [selected]="logParams.sort === level.value"
                         [value]="level.value">{{ level.name }}</option>
                 </select>
+                <h4 class="text-warning">Seleccionar rango</h4>
+                <form [formGroup]="logForm">
+
+                    <app-datepicker formControlName="date"></app-datepicker>
+                </form>
             </div>
         </div>
     </div>
