@@ -1,6 +1,6 @@
 <div class="input-group">
-    <input type="text" class="form-control" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" #dp="bsDatepicker" bsDatepicker/>
+    <input placeholder="{{placeholder}}" type="text" class="form-control" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" #dp="bsDatepicker" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}" />
     <span class="input-group-addon" (click)="dp.toggle()">
-     <span class="fa fa-calendar pointer"></span>
+        <span class="fa fa-calendar-o pointer m-2 "></span>
     </span>
 </div>

@@ -10,22 +10,24 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./logs.component.scss']
 })
 export class LogsComponent implements OnInit {
-  logForm: FormGroup;
 
+  logForm: FormGroup;
+  totalCount: number;
   logs: ILog[];
   logParams: LogParams;
-  levelOptions = [
-    {name: 'Baja a alta', value: 'levelDesc'},
-    {name: 'Alta a baja', value: 'levelAsc'}
+
+  timeOptions = [
+    { name: 'Mas nuevos', value: 'Newest' },
+    { name: 'Mas viejos', value: 'Oldest' }
   ]
 
-  individualLevelOptions = [
-    {name: 'Baja', value: 'info'},
-    {name: 'Media', value: 'warning'},
-    {name: 'Alta', value: 'error'}
+  levelOptions = [
+    { name: 'Baja', value: 'Info' },
+    { name: 'Media', value: 'Warn' },
+    { name: 'Alta', value: 'Error' }
   ]
-  
-  constructor(private logService: LogService, private fb: FormBuilder) { 
+
+  constructor(private logService: LogService, private fb: FormBuilder) {
     this.logParams = this.logService.getLogParams();
   }
 
@@ -35,8 +37,11 @@ export class LogsComponent implements OnInit {
   }
 
   getLogs() {
-    this.logService.getLogsForUser().subscribe((response) => {
+    this.logService.getLogsByParams().subscribe((response) => {
+
       this.logs = response.data;
+      this.totalCount = response.count;
+
     }, error => {
       console.log(error);
     });
@@ -51,17 +56,44 @@ export class LogsComponent implements OnInit {
 
   onPageChanged(pageNumber: number) {
     const params = this.logService.getLogParams();
-    if (params.pageNumber !== pageNumber){
+    if (params.pageNumber !== pageNumber) {
       params.pageNumber = pageNumber;
       this.logService.getLogParams();
       this.getLogs();
+    }
   }
-}
 
-createForm() {
-this.logForm = this.fb.group({
-  date:[null, Validators.required]
-})
-}
+  createForm() {
+    this.logForm = this.fb.group({
+      dateFrom: [null, Validators.required],
+      dateTo: [null, Validators.required]
+    })
+  }
+
+  onLevelSelected(level: string) {
+    const params = this.logService.getLogParams();
+    params.level = level;
+    this.logService.setLogParams(params);
+    this.getLogs();
+  }
+
+  filter() {
+    
+    if (this.logForm.controls.dateFrom.value || this.logForm.controls.dateTo.value){
+      
+      const params = this.logService.getLogParams();
+      params.dateFrom = this.logForm.controls.dateFrom.value;
+      params.dateTo = this.logForm.controls.dateTo.value;
+
+      this.logService.setLogParams(params);
+      this.logService.getLogsByParams().subscribe((response)=> {
+
+        this.logs = response.data;
+        this.totalCount = response.count;
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
 
 }

@@ -47,7 +47,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     TabsModule.forRoot(),
     NgxDropzoneModule,
     ImageCropperModule,
-    BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
   ],
   exports: [

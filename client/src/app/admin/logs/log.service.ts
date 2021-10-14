@@ -6,6 +6,8 @@ import { ILogPagination, LogPagination } from 'src/app/shared/models/logPaginati
 import { map } from 'rxjs/operators';
 import { ILog } from '../../shared/models/log';
 
+import * as moment from 'moment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,14 +16,28 @@ export class LogService {
 
   logParams = new LogParams();
   pagination = new LogPagination();
+
   constructor(private http: HttpClient) { }
 
-  getLogsForUser() {
+  getLogsByParams() {
 
     let params = new HttpParams();
     params = params.append('sort', this.logParams.sort);
     params = params.append('pageIndex', this.logParams.pageNumber.toString());
     params = params.append('pageSize', this.logParams.pageSize.toString());
+    params = params.append('level', this.logParams.level);
+
+    if (this.logParams) {
+      if (this.logParams.dateFrom) {
+        this.logParams.dateFrom = moment(this.logParams.dateFrom).format("YYYY-MM-DD");
+        params = params.append('dateFrom', this.logParams.dateFrom);
+      }
+
+      if (this.logParams.dateTo) {
+        this.logParams.dateTo = moment(this.logParams.dateTo).format("YYYY-MM-DD");
+        params = params.append('dateTo', this.logParams.dateTo)
+      }
+    }
 
     return this.http.get<ILogPagination>(this.baseUrl + 'logs', {
       observe: 'response',
