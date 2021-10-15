@@ -1,4 +1,4 @@
 export interface IValidationResponse{
-    ValidToken: boolean,
-    UserName: string
+    validToken: boolean,
+    userName: string
 }

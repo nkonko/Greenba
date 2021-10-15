@@ -11,8 +11,14 @@ import { Router } from '@angular/router';
 export class ActivationComponent implements OnInit {
   activationForm: FormGroup;
   errors: string[];
+  username: string;
 
-  constructor(private fb: FormBuilder, private accountService: AccountService,private router: Router) { }
+  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation.extras.state) {
+     this.username = navigation.extras.state.userName;
+    }
+   }
 
   ngOnInit(): void {
     this.createActivationForm();
@@ -27,6 +33,9 @@ export class ActivationComponent implements OnInit {
   }
 
   onSubmit() {
+    
+    this.activationForm.value.userName = this.username;
+
     this.accountService.activateUser(this.activationForm.value).subscribe(() => {
       this.router.navigateByUrl('/shop');
     },error => {
