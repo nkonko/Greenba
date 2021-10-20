@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using API.Errors;
 using AutoMapper;
 using Business.Interfaces;
@@ -52,6 +53,20 @@ namespace GreenbaAPI.Controllers
                 Token = await tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
             };
+        }
+
+        [HttpGet("GetAllUsers")]
+        public ActionResult<UserDto> GetAllUsers()
+        {
+            var users = userManager.Users;
+            var result = new List<UserDto>();
+
+            foreach (var user in users)
+            {
+                result.Add(new UserDto() { DisplayName = user.DisplayName, Email = user.Email });
+            }
+
+            return Ok(result);
         }
 
         [HttpGet("emailexist")]
@@ -273,6 +288,8 @@ namespace GreenbaAPI.Controllers
                 Email = user.Email
             };
         }
+
+
 
         //[HttpPost("userphoto")]
         //public async Task<ActionResult<UserDto>> AddUserPhoto([FromForm] UserPhotoDto photoDto)

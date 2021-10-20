@@ -8,7 +8,10 @@
             <app-text-input formControlName="email" [label]="'Email'"></app-text-input>
             <app-text-input formControlName="password" [label]="'Contraseña'" [type]="'password'"></app-text-input>
 
+
             <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+            <br>
+            <button type="button" name="" id="" class="btn btn-primary" btn-lg btn-block (click)="navigateToForgot()">Olvidaste tu password ?</button>
         </form>
     </div>
 </div>

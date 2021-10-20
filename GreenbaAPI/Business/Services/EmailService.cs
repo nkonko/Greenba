@@ -34,7 +34,7 @@ namespace Business.Services
         public async Task SendUserForgotPasswordEmail(string email)
         {
             var replacements = new Dictionary<string, string>();
-            replacements.Add("[Link]", "forgotPassword");
+            replacements.Add("[Link]", $"localhost:4200/#/account/confirmPassword");
 
             var template = GetTemplate(File.ReadAllText(Path.GetFullPath(ForgotPasswordTemplate)), replacements);
 

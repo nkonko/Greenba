@@ -29,10 +29,10 @@
                 <div class="form-inline" *ngIf="products">
                     <input (keyup.enter)="onSearch()" #search class="form-control mr-2" style="width: 300px;" placeholder="Buscar" type="text" />
                     <button (click)="onSearch()" class="btn btn-outline-primary my-2">
-                        Buscar
+                        {{'shop.searchButton' | translate}}
                     </button>
                     <button (click)="onReset()" class="btn btn-outline-success ml-2 my-2">
-                        Borrar
+                        {{'shop.deleteButton' | translate}}
                     </button>
                 </div>
             </div>

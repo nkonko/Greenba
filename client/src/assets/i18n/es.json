@@ -1,0 +1,40 @@
+{
+	"core": {
+		"navbar": {
+			"adminLink": "Administrador",
+			"cartLink": "Ver carrito",
+			"greetings": "Bienvenido",
+			"homeLink": "Inicio",
+			"logInLink": "Ingresar",
+			"logOutLink": "Salir",
+			"logsLink": "Ver bitacora",
+			"ordersLink": "Ver ordenes",
+			"profileLink": "Ver perfil",
+			"registerLink": "Registrarse",
+			"shopLink": "Tienda"
+		},
+		"not-found": {
+			"notfound": "Pagina no encontrada"
+		},
+		"server-error": {
+			"error": "Error de servidor - Refresque la pagina o vuelva atras"
+		},
+		"spinner": {
+			"load": "Cargando..."
+		}
+	},
+	"home": {
+		"greetings": "Bienvenido a Greenba"
+	},
+	"shop": {
+		"deleteButton": "Borrar",
+		"product-details": {
+			"addToCartButton": "Agregar al carrito",
+			"productDescription": "Descripción"
+		},
+		"product-item": {
+			"viewButton": "Ver"
+		},
+		"searchButton": "Buscar"
+	}
+}

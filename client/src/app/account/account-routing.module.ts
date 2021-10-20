@@ -11,8 +11,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, data: { breadcrumb: 'Ingresar' }},
   {path: 'register', component: RegisterComponent, data: { breadcrumb: 'Registro' }},
   {path: 'validate', component: ValidateTokenComponent, data: { breadcrumb: 'Validar identidad' }},
-  {path: 'confirmPassword', component: ConfirmPasswordComponent, data: { breadcrumb: 'Confirmar contraseña' }},
   {path: 'forgotPassword', component: ForgotPasswordComponent, data: { breadcrumb: 'Olvidaste tu contraseña?' }},
+
+  {path: 'confirmPassword', component: ConfirmPasswordComponent, data: { breadcrumb: 'Confirmar contraseña' }},
   {path: 'activation', component: ActivationComponent, data: { breadcrumb: 'Activacion' }}
 ];
 

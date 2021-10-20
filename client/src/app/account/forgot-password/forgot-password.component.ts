@@ -21,14 +21,13 @@ export class ForgotPasswordComponent implements OnInit {
   createForgotForm()
   {
     this.forgotForm = this.fb.group({
-      password:[null, Validators.required],
-      oldPassword: [null, Validators.required]
+      user:[null, Validators.required],
     });
   }
 
   onSubmit() {
-    this.accountService.activateUser(this.forgotForm.value).subscribe(() => {
-      this.router.navigateByUrl('/confirm');
+    this.accountService.forgotPassword(this.forgotForm.value).subscribe(() => {
+      this.router.navigateByUrl('/home');
     },error => {
       console.error(error);
       this.errors = error.errors;

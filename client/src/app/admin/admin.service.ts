@@ -44,4 +44,10 @@ export class AdminService {
       {}
     );
   }
+
+  getAllUsers(){
+    return this.http.get(
+      this.baseUrl + 'account/getallusers'
+    );
+  }
 }

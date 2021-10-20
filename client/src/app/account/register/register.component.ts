@@ -4,7 +4,6 @@ import { AccountService } from '../account.service';
 import { Router } from '@angular/router';
 import { timer, of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +14,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errors: string[];
 
-  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router, private toast: ToastrService) { }
+  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -32,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.accountService.register(this.registerForm.value).subscribe(response => {
-      this.router.navigateByUrl('/shop');
+      this.router.navigateByUrl('/home');
     }, error => {
       console.log(error);
       this.errors = error.errors;

@@ -10,6 +10,7 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { SharedModule } from '../shared/shared.module';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -18,6 +19,7 @@ import { HasRoleDirective } from './directives/has-role.directive';
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule,
     BreadcrumbModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

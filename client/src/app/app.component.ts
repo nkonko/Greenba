@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from './basket/basket.service';
 import { AccountService } from './account/account.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,16 @@ import { AccountService } from './account/account.service';
 })
 export class AppComponent implements OnInit {
   title = 'Greenba';
+  supportedLanguages = ['en', 'de'];
 
   constructor(
     private basketService: BasketService,
-    private accountService: AccountService
-  ) {}
+    private accountService: AccountService,
+    private translate: TranslateService
+  ) {
+    this.translate.addLangs(this.supportedLanguages);
+    this.translate.setDefaultLang('es');
+  }
 
   ngOnInit(): void {
     this.loadBasket();

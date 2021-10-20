@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../account.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-activation',
@@ -13,7 +14,7 @@ export class ActivationComponent implements OnInit {
   errors: string[];
   username: string;
 
-  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router) {
+  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router, private toast: ToastrService) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation.extras.state) {
      this.username = navigation.extras.state.userName;
@@ -37,6 +38,7 @@ export class ActivationComponent implements OnInit {
     this.activationForm.value.userName = this.username;
 
     this.accountService.activateUser(this.activationForm.value).subscribe(() => {
+      this.toast.success("Usuario activado");
       this.router.navigateByUrl('/shop');
     },error => {
       console.error(error);

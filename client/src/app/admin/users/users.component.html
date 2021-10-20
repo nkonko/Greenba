@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-hover" style="cursor: pointer;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Deshabilitar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users; let i = index" class="border-0">
+                            <td class="align-middle"><strong>{{i}}</strong></td>
+                            <td class="align-middle"><strong>{{user.displayName }}</strong></td>
+                            <td class="align-middle"><strong>{{user.email}}</strong></td>
+                            <td *ngIf="!isCurrent" class="align-middle">
+                                <a class="text-danger ml-4">
+                                    <i (click)="disableUser(user)" class="fa fa-user" style="font-size: 2em; cursor: pointer;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

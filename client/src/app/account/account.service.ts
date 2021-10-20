@@ -125,7 +125,7 @@ export class AccountService {
 
   deactivateUser(userName: string)
   {
-    return this.http.put(this.baseUrl + 'account/deactivate', userName);
+    return this.http.put(this.baseUrl + 'account/deactivate?userName=' + userName, userName);
   }
 
   forgotPassword(userName: string)
