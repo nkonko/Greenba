@@ -1,5 +1,5 @@
 export class LogParams {
-  sort = 'levelDesc';
+  sort = 'Newest';
   pageNumber = 1;
   pageSize = 6;
   level: string;

@@ -32,6 +32,20 @@
                     <a routerLink="/admin/logs" *appHasRole="['Admin']" class="dropdown-item d-flex align-items-center py-2">
                         <i class="fa fa-align-justify mr-3"></i> {{'core.navbar.logsLink' | translate}}
                     </a>
+                    <a routerLink="/admin/users" *appHasRole="['Admin']" class="dropdown-item d-flex align-items-center py-2">
+                        <i class="fa fa-users mr-3"></i> {{'core.navbar.usersLink' | translate}}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <div *ngIf="!langEs">
+                        <a (click)="changeLanguajeEs()" class="dropdown-item d-flex align-items-center py-2 bg-light">
+                            <i class="fa fa-globe mr-3"></i> {{'core.navbar.langEs' | translate}}
+                        </a>
+                    </div>
+                    <div *ngIf="langEs">
+                        <a (click)="changeLanguajeEn()" class="dropdown-item d-flex align-items-center py-2 bg-light">
+                            <i class="fa fa-globe mr-3"></i> {{'core.navbar.langEs' | translate}}
+                        </a>
+                    </div>
                     <div class="dropdown-divider"></div>
                     <a (click)="logout()" class="dropdown-item d-flex align-items-center py-2 bg-light">
                         <i class="fa fa-sign-out mr-3"></i> {{'core.navbar.logOutLink' | translate}}

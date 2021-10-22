@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ReplaySubject, of } from 'rxjs';
+import { ReplaySubject, of, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IUser } from '../shared/models/user';
 import { map } from 'rxjs/operators';
@@ -123,18 +123,27 @@ export class AccountService {
     return this.http.put(this.baseUrl + 'account/activate', values);
   }
 
-  deactivateUser(userName: string)
+  disableUser(values: any)
   {
-    return this.http.put(this.baseUrl + 'account/deactivate?userName=' + userName, userName);
+    return this.http.put(this.baseUrl + 'account/disable', values);
   }
 
-  forgotPassword(userName: string)
+  enableUser(values: any)
   {
-    return this.http.put(this.baseUrl + 'account/forgotPassword', userName);
+    return this.http.put(this.baseUrl + 'account/enable', values);
+  }
+
+  forgotPassword(values: any)
+  {
+    return this.http.put(this.baseUrl + 'account/forgotPassword', values);
   }
 
   changePassword(values: any)
   {
     return this.http.put(this.baseUrl + 'account/changePassword', values);
+  }
+
+  changeProfile(values: any): Observable<IUser> {
+    return this.http.put<IUser>(this.baseUrl + 'account/changeProfile', values);
   }
 }

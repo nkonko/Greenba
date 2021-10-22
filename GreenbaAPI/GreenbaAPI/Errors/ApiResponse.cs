@@ -18,7 +18,7 @@ namespace API.Errors
             return statusCode switch
             {
                 400 => "Bad request",
-                401 => "You are not authorized",
+                401 => "No estas autorizado",
                 403 => "Forbidden",
                 404 => "Not found",
                 500 => "Internal Server Error",

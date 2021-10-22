@@ -63,7 +63,7 @@ namespace GreenbaAPI.Controllers
 
             foreach (var user in users)
             {
-                result.Add(new UserDto() { DisplayName = user.DisplayName, Email = user.Email });
+                result.Add(new UserDto() { DisplayName = user.DisplayName, Email = user.Email, Active = user.Active });
             }
 
             return Ok(result);
@@ -157,14 +157,14 @@ namespace GreenbaAPI.Controllers
             return Ok(user);
         }
 
-        [HttpPut("deactivate")]
-        public async Task<ActionResult<UserDto>> Deactivate(string userName)
+        [HttpPut("disable")]
+        public async Task<ActionResult<UserDto>> Disable(UserAdminDto dto)
         {
-            var user = await userManager.FindByEmailAsync(userName);
+            var user = await userManager.FindByEmailAsync(dto.UserName);
 
             if (user == null)
             {
-                return BadRequest("User doesn't exist");
+                return BadRequest("Usuario no encontrado");
             }
 
             user.Active = false;
@@ -179,10 +179,32 @@ namespace GreenbaAPI.Controllers
             return Ok(user);
         }
 
-        [HttpPut("forgotPassword")]
-        public async Task<ActionResult<UserDto>> ForgotPassword(string userName)
+        [HttpPut("enable")]
+        public async Task<ActionResult<UserDto>> Enable(UserAdminDto dto)
         {
-            var user = await userManager.FindByEmailAsync(userName);
+            var user = await userManager.FindByEmailAsync(dto.UserName);
+
+            if (user == null)
+            {
+                return BadRequest("Usuario no encontrado");
+            }
+
+            user.Active = true;
+
+            var result = await userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return NotFound("User no encontrado");
+            }
+
+            return Ok(user);
+        }
+
+        [HttpPut("forgotPassword")]
+        public async Task<ActionResult<UserDto>> ForgotPassword(UserAdminDto dto)
+        {
+            var user = await userManager.FindByEmailAsync(dto.UserName);
 
             if (user == null)
             {
@@ -220,6 +242,55 @@ namespace GreenbaAPI.Controllers
 
                 await userManager.RemovePasswordAsync(user);
                 await userManager.AddPasswordAsync(user, changePasswordDto.Password);
+
+                if (user.UserName != changePasswordDto.UserName)
+                {
+                    user.UserName = changePasswordDto.UserName;
+                    await userManager.UpdateAsync(user);
+                }
+
+                return Ok(user);
+            }
+
+            return BadRequest("Hubo un problema cambiando su password");
+        }
+
+        [HttpPut("changeProfile")]
+        public async Task<ActionResult<UserDto>> ChangeProfile(ChangeProfileDto changeProfileDto)
+        {
+            if (!string.IsNullOrEmpty(changeProfileDto.UserName) && (
+                !string.IsNullOrEmpty(changeProfileDto.NewUserName) ||
+                !string.IsNullOrEmpty(changeProfileDto.Password) &&
+                !string.IsNullOrEmpty(changeProfileDto.ConfirmPassword) &&
+                string.Equals(changeProfileDto.Password, changeProfileDto.ConfirmPassword)))
+            {
+                var user = await userManager.FindByEmailAsync(changeProfileDto.UserName);
+
+                if (user == null)
+                {
+                    return BadRequest("El usuario no existe");
+                }
+
+                if (!user.Active)
+                {
+                    return BadRequest("El usuario no esta activo");
+                }
+
+                if (!string.IsNullOrEmpty(changeProfileDto.Password) &&
+                    !string.IsNullOrEmpty(changeProfileDto.ConfirmPassword) &&
+                    string.Equals(changeProfileDto.Password, changeProfileDto.ConfirmPassword))
+                {
+                    await userManager.RemovePasswordAsync(user);
+
+                    await userManager.AddPasswordAsync(user, changeProfileDto.Password);
+                }
+
+                if (user.DisplayName != changeProfileDto.NewUserName)
+                {
+                    user.DisplayName = changeProfileDto.NewUserName;
+                    await userManager.UpdateAsync(user);
+                }
+
                 return Ok(user);
             }
 

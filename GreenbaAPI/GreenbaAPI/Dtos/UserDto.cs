@@ -7,5 +7,7 @@
         public string DisplayName { get; set; }
 
         public string Token { get; set; }
+
+        public bool Active { get; set; }
     }
 }

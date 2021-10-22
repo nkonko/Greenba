@@ -1,4 +1,34 @@
 <div class="container mt-5">
+    <div class="row align-items-start">
+
+        <div class="col-3">
+            <div>
+                <h4 class="text-warning">Antigüedad</h4>
+                <select class="custom-select mb-3 mb-4" (change)="onSortSelected($event.target.value)">
+                    <option *ngFor="let time of timeOptions" [selected]="orderParams.sort === time.value"
+                        [value]="time.value">{{ time.name }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-3 mb-3">
+            <form [formGroup]="orderForm">
+                <h4 class="text-warning">Fecha desde:</h4>
+                <app-datepicker formControlName="dateFrom" placeholder="Desde" (ngModelChange)="filter()"></app-datepicker>
+                <br>
+                <h4 class="text-warning">Fecha hasta:</h4>
+                <app-datepicker formControlName="dateTo" placeholder="Hasta" (ngModelChange)="filter()"></app-datepicker>
+            </form>
+        </div>
+        <div class="col-3 mb-3">
+            <div>
+                <h4 class="text-warning">Estado</h4>
+                <select class="custom-select mb-3 mb-4" (change)="onStatusSelected($event.target.value)">
+                    <option *ngFor="let status of statusOptions" [selected]="orderParams.sort === status.value"
+                        [value]="status.value">{{ status.name }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <table class="table table-hover" style="cursor: pointer;">
@@ -19,6 +49,10 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="d-flex justify-content-center">
+                <app-pager [pageSize]="orderParams.pageSize" [totalCount]="totalCount" [pageNumber]="orderParams.pageNumber" (pageChanged)="onPageChanged($event)"></app-pager>
+            </div>
         </div>
     </div>
 </div>

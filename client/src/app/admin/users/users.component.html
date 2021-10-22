@@ -8,7 +8,7 @@
                             <th>#</th>
                             <th>Nombre</th>
                             <th>Email</th>
-                            <th>Deshabilitar</th>
+                            <th>Habilitar/Deshabilitar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -16,10 +16,17 @@
                             <td class="align-middle"><strong>{{i}}</strong></td>
                             <td class="align-middle"><strong>{{user.displayName }}</strong></td>
                             <td class="align-middle"><strong>{{user.email}}</strong></td>
-                            <td *ngIf="!isCurrent" class="align-middle">
-                                <a class="text-danger ml-4">
-                                    <i (click)="disableUser(user)" class="fa fa-user" style="font-size: 2em; cursor: pointer;"></i>
-                                </a>
+                            <td class="align-middle">
+                                <div *ngIf="user.active">
+                                    <a class="text-danger ml-5">
+                                        <i (click)="disableUser(user)" class="fa fa-user" style="font-size: 2em; cursor: pointer;"></i>
+                                    </a>
+                                </div>
+                                <div *ngIf="!user.active">
+                                    <a class="text-success ml-5">
+                                        <i (click)="enableUser(user)" class="fa fa-user" style="font-size: 2em; cursor: pointer;"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
