@@ -54,7 +54,7 @@ export class OrdersService {
       }
     }
 
-    return this.http.get<IOrderPagination>(this.baseUrl + 'orders', {
+    return this.http.get<IOrderPagination>(this.baseUrl + 'orders/getorders', {
       observe: 'response',
       params,
     }).pipe(

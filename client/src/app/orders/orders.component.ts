@@ -36,8 +36,16 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders() {
-    this.ordersService.getOrderForUser().subscribe((orders: IOrder[]) => {
-      this.orders = orders;
+    // this.ordersService.getOrderForUser().subscribe((orders: IOrder[]) => {
+    //   this.orders = orders;
+    // }, error => {
+    //   console.log(error);
+    // });
+    this.ordersService.getOrdersByParams().subscribe((response) => {
+
+      this.orders = response.data;
+      this.totalCount = response.count;
+
     }, error => {
       console.log(error);
     });

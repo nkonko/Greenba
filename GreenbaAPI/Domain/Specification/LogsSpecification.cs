@@ -24,10 +24,10 @@ namespace Domain.Specification
                 switch (logsParams.Sort)
                 {
                     case "Oldest":
-                        AddOrderByDesc(p => p.Logged);
+                        AddOrderBy(p => p.Logged);
                         break;
                     default:
-                        AddOrderBy(p => p.Logged);
+                        AddOrderByDesc(p => p.Logged);
                         break;
                 }
             }

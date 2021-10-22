@@ -4,10 +4,13 @@ using API.Errors;
 using AutoMapper;
 using Business.Interfaces;
 using Domain.Entities.OrderAggregate;
+using Domain.Specification;
 using GreenbaAPI.Dtos;
 using GreenbaAPI.Extensions;
+using GreenbaAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Source.Repository.Interfaces;
 
 namespace GreenbaAPI.Controllers
 {
@@ -15,12 +18,14 @@ namespace GreenbaAPI.Controllers
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService orderService;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public OrdersController(IOrderService orderService, IMapper mapper)
+        public OrdersController(IOrderService orderService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             this.orderService = orderService;
             this.mapper = mapper;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -48,6 +53,22 @@ namespace GreenbaAPI.Controllers
             var orders = await orderService.GetOrdersForUserAsync(email);
 
             return Ok(mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDto>>(orders));
+        }
+
+        [HttpGet("getorders")]
+        public async Task<ActionResult<Pagination<OrderDto>>> GetOrders([FromQuery] OrderSpecParams orderparams)
+        {
+            var spec = new OrderSpecification(orderparams);
+
+            var orders = await unitOfWork.Repository<Order>().ListAsync(spec);
+
+            var countSpec = new OrdersFilterCountSpecification(orderparams);
+
+            var totalItems = await unitOfWork.Repository<Order>().CountAsync(countSpec);
+
+            var ordersResult = mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDto>>(orders);
+
+            return Ok(new Pagination<OrderToReturnDto>(orderparams.PageIndex, orderparams.PageSize, totalItems, ordersResult));
         }
 
         [HttpGet("{id}")]
