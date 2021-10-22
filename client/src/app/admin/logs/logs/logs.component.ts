@@ -22,9 +22,9 @@ export class LogsComponent implements OnInit {
   ]
 
   levelOptions = [
-    { name: 'Baja', value: 'Info' },
+    { name: 'Alta', value: 'Error' },
     { name: 'Media', value: 'Warn' },
-    { name: 'Alta', value: 'Error' }
+    { name: 'Baja', value: 'Info' }
   ]
 
   constructor(private logService: LogService, private fb: FormBuilder) {
