@@ -3,7 +3,15 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>e67857a3-08ee-4090-b5a6-a3eecea88171</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot2\**" />
+    <Content Remove="wwwroot2\**" />
+    <EmbeddedResource Remove="wwwroot2\**" />
+    <None Remove="wwwroot2\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Remove="nlog.config" />
@@ -18,6 +26,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
 	<PackageReference Include="NLog" Version="4.7.*" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.5" />
@@ -28,71 +37,6 @@
 	<Content Include="images\.DS_Store" />
 	<Content Include="images\products\.DS_Store" />
 	<Content Include="images\products\placeholder.png" />
-	<Content Include="wwwroot2\account-account-module-es2015.js" />
-	<Content Include="wwwroot2\account-account-module-es2015.js.map" />
-	<Content Include="wwwroot2\account-account-module-es5.js" />
-	<Content Include="wwwroot2\account-account-module-es5.js.map" />
-	<Content Include="wwwroot2\admin-admin-module-es2015.js" />
-	<Content Include="wwwroot2\admin-admin-module-es2015.js.map" />
-	<Content Include="wwwroot2\admin-admin-module-es5.js" />
-	<Content Include="wwwroot2\admin-admin-module-es5.js.map" />
-	<Content Include="wwwroot2\assets\images\colgantes.jpg" />
-	<Content Include="wwwroot2\assets\images\huerta1.jpg" />
-	<Content Include="wwwroot2\assets\images\huerta2.jpg" />
-	<Content Include="wwwroot2\assets\images\huerta4.jpg" />
-	<Content Include="wwwroot2\assets\images\macetas.jpg" />
-	<Content Include="wwwroot2\assets\images\placeholder.png" />
-	<Content Include="wwwroot2\basket-basket-module-es2015.js" />
-	<Content Include="wwwroot2\basket-basket-module-es2015.js.map" />
-	<Content Include="wwwroot2\basket-basket-module-es5.js" />
-	<Content Include="wwwroot2\basket-basket-module-es5.js.map" />
-	<Content Include="wwwroot2\checkout-checkout-module-es2015.js" />
-	<Content Include="wwwroot2\checkout-checkout-module-es2015.js.map" />
-	<Content Include="wwwroot2\checkout-checkout-module-es5.js" />
-	<Content Include="wwwroot2\checkout-checkout-module-es5.js.map" />
-	<Content Include="wwwroot2\common-es2015.js" />
-	<Content Include="wwwroot2\common-es2015.js.map" />
-	<Content Include="wwwroot2\common-es5.js" />
-	<Content Include="wwwroot2\common-es5.js.map" />
-	<Content Include="wwwroot2\favicon.ico" />
-	<Content Include="wwwroot2\fontawesome-webfont.eot" />
-	<Content Include="wwwroot2\fontawesome-webfont.svg" />
-	<Content Include="wwwroot2\fontawesome-webfont.ttf" />
-	<Content Include="wwwroot2\fontawesome-webfont.woff" />
-	<Content Include="wwwroot2\fontawesome-webfont.woff2" />
-	<Content Include="wwwroot2\index.html" />
-	<Content Include="wwwroot2\main-es2015.js" />
-	<Content Include="wwwroot2\main-es2015.js.map" />
-	<Content Include="wwwroot2\main-es5.js" />
-	<Content Include="wwwroot2\main-es5.js.map" />
-	<Content Include="wwwroot2\orders-orders-module-es2015.js" />
-	<Content Include="wwwroot2\orders-orders-module-es2015.js.map" />
-	<Content Include="wwwroot2\orders-orders-module-es5.js" />
-	<Content Include="wwwroot2\orders-orders-module-es5.js.map" />
-	<Content Include="wwwroot2\polyfills-es2015.js" />
-	<Content Include="wwwroot2\polyfills-es2015.js.map" />
-	<Content Include="wwwroot2\polyfills-es5.js" />
-	<Content Include="wwwroot2\polyfills-es5.js.map" />
-	<Content Include="wwwroot2\profile-profile-module-es2015.js" />
-	<Content Include="wwwroot2\profile-profile-module-es2015.js.map" />
-	<Content Include="wwwroot2\profile-profile-module-es5.js" />
-	<Content Include="wwwroot2\profile-profile-module-es5.js.map" />
-	<Content Include="wwwroot2\runtime-es2015.js" />
-	<Content Include="wwwroot2\runtime-es2015.js.map" />
-	<Content Include="wwwroot2\runtime-es5.js" />
-	<Content Include="wwwroot2\runtime-es5.js.map" />
-	<Content Include="wwwroot2\shop-shop-module-es2015.js" />
-	<Content Include="wwwroot2\shop-shop-module-es2015.js.map" />
-	<Content Include="wwwroot2\shop-shop-module-es5.js" />
-	<Content Include="wwwroot2\shop-shop-module-es5.js.map" />
-	<Content Include="wwwroot2\styles-es2015.js" />
-	<Content Include="wwwroot2\styles-es2015.js.map" />
-	<Content Include="wwwroot2\styles-es5.js" />
-	<Content Include="wwwroot2\styles-es5.js.map" />
-	<Content Include="wwwroot2\vendor-es2015.js" />
-	<Content Include="wwwroot2\vendor-es2015.js.map" />
-	<Content Include="wwwroot2\vendor-es5.js" />
-	<Content Include="wwwroot2\vendor-es5.js.map" />
 	<None Include="nlog.config">
 	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</None>
