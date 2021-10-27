@@ -8,8 +8,8 @@ namespace Business.Services
 {
     public class EmailService : IEmailService
     {
-        private const string ActivateUserTemplate = "Templates\\ActivateUser.html";
-        private const string ForgotPasswordTemplate = "Templates\\ForgotPassword.html";
+        private const string ActivateUserTemplate = "Templates/ActivateUser.html";
+        private const string ForgotPasswordTemplate = "Templates/ForgotPassword.html";
 
         private readonly IEmailSender emailSender;
         private readonly IEmailBuilder emailBuilder;
@@ -23,7 +23,7 @@ namespace Business.Services
         public async Task SendUserActivationEmail(string displayName, string email, string token)
         {
             var replacements = new Dictionary<string, string>();
-            replacements.Add("[Link]", $"localhost:4200/#/account/validate?Token={token}");
+            replacements.Add("[Link]", $"localhost/#/account/validate?Token={token}");
             replacements.Add("[User]", displayName);
 
             var template = GetTemplate(File.ReadAllText(Path.GetFullPath(ActivateUserTemplate)), replacements);
@@ -34,7 +34,7 @@ namespace Business.Services
         public async Task SendUserForgotPasswordEmail(string email)
         {
             var replacements = new Dictionary<string, string>();
-            replacements.Add("[Link]", $"localhost:4200/#/account/confirmPassword");
+            replacements.Add("[Link]", $"localhost/#/account/confirmPassword");
 
             var template = GetTemplate(File.ReadAllText(Path.GetFullPath(ForgotPasswordTemplate)), replacements);
 
