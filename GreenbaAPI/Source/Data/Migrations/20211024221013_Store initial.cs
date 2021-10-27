@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Source.Data.Migrations
 {
-    public partial class Postgresinitial : Migration
+    public partial class Storeinitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,6 +22,24 @@ namespace Source.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DeliveryMethods", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Logs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Logged = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Level = table.Column<string>(type: "text", nullable: true),
+                    Message = table.Column<string>(type: "text", nullable: true),
+                    Logger = table.Column<string>(type: "text", nullable: true),
+                    Callsite = table.Column<string>(type: "text", nullable: true),
+                    Exception = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,6 +200,9 @@ namespace Source.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Logs");
+
             migrationBuilder.DropTable(
                 name: "OrderItems");
 

@@ -10,8 +10,8 @@ using Source;
 namespace Source.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20210831231731_Postgres initial")]
-    partial class Postgresinitial
+    [Migration("20211024221013_Store initial")]
+    partial class Storeinitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,36 @@ namespace Source.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("Domain.Entities.Log", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Callsite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Exception")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Level")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Logged")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Logger")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
+                });
 
             modelBuilder.Entity("Domain.Entities.OrderAggregate.DeliveryMethod", b =>
                 {
