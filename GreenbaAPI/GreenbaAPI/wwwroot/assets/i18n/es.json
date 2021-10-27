@@ -1,0 +1,47 @@
+{
+	"core": {
+		"navbar": {
+			"adminLink": "Administrador",
+			"cartLink": "Ver carrito",
+			"greetings": "Bienvenido",
+			"homeLink": "Inicio",
+			"langEs": "Cambiar a ingles",
+			"logInLink": "Ingresar",
+			"logOutLink": "Salir",
+			"logsLink": "Ver bitacora",
+			"ordersLink": "Ver ordenes",
+			"profileLink": "Ver perfil",
+			"registerLink": "Registrarse",
+			"shopLink": "Tienda",
+			"usersLink": "Usuarios"
+		},
+		"not-found": {
+			"notfound": "Pagina no encontrada"
+		},
+		"server-error": {
+			"error": "Error de servidor - Refresque la pagina o vuelva atras"
+		},
+		"spinner": {
+			"load": "Cargando..."
+		}
+	},
+	"home": {
+		"aboutGreenba": "Huertas organicas a tu medida",
+		"description1": "No importa el espacio, diseñamos y construimos diseños adaptables y a medida de tus posibilidades. ",
+		"greetings": "Bienvenido a Greenba",
+		"mission": "Nuestra mision",
+		"missionDescription": "El consumo de alimentos orgánicos ayuda a tener una excelente salud. Contribuye a mantener el balance bioquímico del organismo, consumiendo vitaminas y minerales que encontramos en ellos. Contamos con una excelente atención personalizada a nuestros clientes, asesoramiento, respondemos cualquier duda que tengan sobre nuestros servicios o los beneficios y propiedades que cada uno aporta.",
+		"socialNetworks": "Redes sociales"
+	},
+	"shop": {
+		"deleteButton": "Borrar",
+		"product-details": {
+			"addToCartButton": "Agregar al carrito",
+			"productDescription": "Descripción"
+		},
+		"product-item": {
+			"viewButton": "Ver"
+		},
+		"searchButton": "Buscar"
+	}
+}
