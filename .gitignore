@@ -7,3 +7,4 @@ Infrastructure/Data/.DS_Store
 *rdb
 publish
 wwwroot
+*.suo
