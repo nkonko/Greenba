@@ -216,7 +216,7 @@ namespace GreenbaAPI.Controllers
                 return BadRequest("El usuario no esta activo");
             }
 
-            await emailService.SendUserForgotPasswordEmail(user.Email);
+            await emailService.SendUserForgotPasswordEmail(user.Email, user.DisplayName);
             return Ok();
         }
 
@@ -300,9 +300,10 @@ namespace GreenbaAPI.Controllers
         [HttpGet("validateToken")]
         public ActionResult<ValidationResponseDto> ValidateToken([FromQuery] string token)
         {
-            if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token) || token == "null")
             {
-                return BadRequest("El link es invalido"); ;
+                logger.LogError("Invalid Token");
+                return new ValidationResponseDto() { ValidToken = false };
             }
 
             var result = tokenService.ValidateToken(token, out var userName);
@@ -355,7 +356,7 @@ namespace GreenbaAPI.Controllers
             return new UserDto
             {
                 DisplayName = user.DisplayName,
-                Token = await tokenService.CreateToken(user),
+                Token = token,
                 Email = user.Email
             };
         }

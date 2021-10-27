@@ -39,7 +39,7 @@ export class ActivationComponent implements OnInit {
 
     this.accountService.activateUser(this.activationForm.value).subscribe(() => {
       this.toast.success("Usuario activado");
-      this.router.navigateByUrl('/shop');
+      this.router.navigate(['/'])
     },error => {
       console.error(error);
       this.errors = error.errors;

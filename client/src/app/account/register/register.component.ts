@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AsyncValidatorFn } from '@angular/forms';
 import { AccountService } from '../account.service';
-import { Router } from '@angular/router';
 import { timer, of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
@@ -15,7 +14,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errors: string[];
 
-  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router, private toast:ToastrService) { }
+  constructor(private fb: FormBuilder, private accountService: AccountService, private toast:ToastrService) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -31,7 +30,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.accountService.register(this.registerForm.value).subscribe(response => {
+    this.accountService.register(this.registerForm.value).subscribe(() => {
       this.toast.success("Registro completado");
       this.toast.success("Por favor verifica tu mail");
     }, error => {

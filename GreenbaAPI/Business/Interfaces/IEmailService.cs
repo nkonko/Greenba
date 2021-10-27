@@ -6,6 +6,6 @@ namespace Business.Interfaces
     {
         Task SendUserActivationEmail(string displayName, string email, string token);
 
-        Task SendUserForgotPasswordEmail(string email);
+        Task SendUserForgotPasswordEmail(string email, string displayName);
     }
 }
