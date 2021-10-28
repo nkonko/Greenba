@@ -47,9 +47,9 @@ namespace GreenbaAPI
             services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.Configure<SendGridEmailSenderOptions>(options =>
             {
-                options.ApiKey = configuration["ExternalProviders:SendGrid:ApiKey"];
-                options.SenderEmail = configuration["ExternalProviders:SendGrid:SenderEmail"];
-                options.SenderName = configuration["ExternalProviders:SendGrid:SenderName"];
+                options.ApiKey = "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";
+                options.SenderEmail = "nicoazzara@hotmail.com";
+                options.SenderName = "Greenba NoReply";
             });
 
             services.AddApplicationServices();
