@@ -7,9 +7,13 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
 import { ProfileModule } from './profile/profile.module';
+import { ContactComponent } from './contact/contact.component';
+import { BuildServicesComponent } from './build-services/build-services.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Inicio' } },
+  { path: 'services', component: BuildServicesComponent, data: { breadcrumb: 'Servicios' } },
+  { path: 'contact', component: ContactComponent, data: { breadcrumb: 'Contacto' } },
   {
     path: 'test-error',
     component: TestErrorComponent,

@@ -1,47 +1,49 @@
 {
-	"core": {
-		"navbar": {
-			"adminLink": "Administrator",
-			"cartLink": "View cart",
-			"greetings": "Welcome",
-			"homeLink": "Home",
-			"langEs": "Change to spanish",
-			"logInLink": "LogIn",
-			"logOutLink": "Logout",
-			"logsLink": "View logs",
-			"ordersLink": "View orders",
-			"profileLink": "View profile",
-			"registerLink": "Register",
-			"shopLink": "Shop",
-			"usersLink": "Users"
-		},
-		"not-found": {
-			"notfound": "Page not found"
-		},
-		"server-error": {
-			"error": "Server error - refresh the page or go back"
-		},
-		"spinner": {
-			"load": "Loading..."
-		}
-	},
-	"home": {
-		"aboutGreenba": "Organic gardens for you",
-		"description1": "No matter the space, we design and build adaptable designs tailored to your possibilities.",
-		"greetings": "Welcome to Greenba",
-		"mission": "Our mission",
-		"missionDescription": "Consuming organic food helps you have excellent health. It contributes to maintaining the biochemical balance of the body, consuming vitamins and minerals that we find in them. We have excellent personalized attention to our clients, advice, we answer any questions you have about our services or the benefits and properties that each one provides. ",
-		"socialNetworks": "Social"
-	},
-	"shop": {
-		"deleteButton": "Reset",
-		"product-details": {
-			"addToCartButton": "Add to cart",
-			"productDescription": "Description"
-		},
-		"product-item": {
-			"viewButton": "View"
-		},
-		"searchButton": "Search"
-	}
+    "core": {
+        "navbar": {
+            "adminLink": "Administrator",
+            "cartLink": "View cart",
+            "greetings": "Welcome",
+            "homeLink": "Home",
+            "langEs": "Change to spanish",
+            "logInLink": "LogIn",
+            "logOutLink": "Logout",
+            "logsLink": "View logs",
+            "ordersLink": "View orders",
+            "profileLink": "View profile",
+            "registerLink": "Register",
+            "shopLink": "Shop",
+            "usersLink": "Users",
+            "servicesink": "Our services",
+            "contactLink": "Contact"
+        },
+        "not-found": {
+            "notfound": "Page not found"
+        },
+        "server-error": {
+            "error": "Server error - refresh the page or go back"
+        },
+        "spinner": {
+            "load": "Loading..."
+        }
+    },
+    "home": {
+        "aboutGreenba": "Organic gardens for you",
+        "description1": "No matter the space, we design and build adaptable designs tailored to your possibilities.",
+        "greetings": "Welcome to Greenba",
+        "mission": "Our mission",
+        "missionDescription": "Consuming organic food helps you have excellent health. It contributes to maintaining the biochemical balance of the body, consuming vitamins and minerals that we find in them. We have excellent personalized attention to our clients, advice, we answer any questions you have about our services or the benefits and properties that each one provides. ",
+        "socialNetworks": "Social"
+    },
+    "shop": {
+        "deleteButton": "Reset",
+        "product-details": {
+            "addToCartButton": "Add to cart",
+            "productDescription": "Description"
+        },
+        "product-item": {
+            "viewButton": "View"
+        },
+        "searchButton": "Search"
+    }
 }

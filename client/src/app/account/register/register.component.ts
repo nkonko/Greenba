@@ -31,8 +31,10 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.accountService.register(this.registerForm.value).subscribe(() => {
-      this.toast.success("Registro completado");
-      this.toast.success("Por favor verifica tu email");
+      if (this.registerForm.valid) {
+        this.toast.success("Registro completado");
+        this.toast.success("Por favor verifica tu email");
+      }
     }, error => {
       console.log(error);
       this.errors = error.errors;
