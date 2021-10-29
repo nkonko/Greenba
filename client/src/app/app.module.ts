@@ -12,10 +12,12 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { BuildServicesComponent } from './build-services/build-services.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, BuildServicesComponent, ContactComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
