@@ -12,13 +12,13 @@
 
     <div *ngIf="(controlDir && controlDir.control && controlDir.control.status === 'PENDING')" class="fa fa-spinner fa-spin loader"></div>
     <div class="invalid-feedback" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched)">
-        <span *ngIf="controlDir.control.errors?.required">Debe ingresar {{label}} </span>
-        <span *ngIf="controlDir.control.errors?.pattern">Email invalido</span>
-        <span *ngIf="controlDir.control.errors?.min">{{label}} Debe ser mayor a 0</span>
-        <span *ngIf="controlDir.control.hasError('noDecimal')">El precio debe ser un numero decimal</span>
+        <span *ngIf="controlDir.control.errors?.required">{{'text-input.text-input.mustFill' | translate}} {{label}} </span>
+        <span *ngIf="controlDir.control.errors?.pattern">{{'text-input.text-input.invalid' | translate}}</span>
+        <span *ngIf="controlDir.control.errors?.min">{{label}} {{'text-input.text-input.greaterThanCero' | translate}}</span>
+        <span *ngIf="controlDir.control.hasError('noDecimal')">{{'text-input.text-input.priceMustBeDecimal' | translate}}</span>
     </div>
 
     <div class="invalid-feedback d-block" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.dirty)">
-        <span *ngIf="controlDir.control.errors?.emailExists">Email en uso</span>
+        <span *ngIf="controlDir.control.errors?.emailExists">{{'text-input.text-input.usedEmail' | translate}}</span>
     </div>
 </div>

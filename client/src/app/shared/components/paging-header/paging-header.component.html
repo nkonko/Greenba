@@ -1,6 +1,6 @@
 <header>
     <span *ngIf="this.totalCount && this.totalCount > 0">
-    Mostrando 
+      {{'paging-header.show' | translate}} 
     <strong>
       {{(pageNumber-1) * pageSize + 1}} - 
       {{pageNumber * pageSize
@@ -8,9 +8,9 @@
         ? totalCount 
         : pageNumber * pageSize         
       }}
-    </strong> de <strong>{{totalCount}}</strong> resultados
+    </strong> {{'paging-header.of' | translate}} <strong>{{totalCount}}</strong> {{'paging-header.results' | translate}}
     </span>
     <span *ngIf="totalCount === 0">
-      Hay <strong>0</strong> resultados.
+      {{'paging-header.are' | translate}} <strong>0</strong> {{'paging-header.results' | translate}}.
     </span>
 </header>

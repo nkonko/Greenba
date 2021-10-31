@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <div><i class="fa fa-check-circle fa-5x" style="color: green;"></i></div>
-    <h2>Gracias. Su orden fue confirmada</h2>
-    <button *ngIf="order" routerLink="/orders/{{order?.id}}" class="btn btn-outline-success">Ver tu orden</button>
-    <button *ngIf="!order" routerLink="/orders" class="btn btn-outline-success">Ver todas las ordenes</button>
+    <h2>{{'checkout-success.confirmed' | translate}}</h2>
+    <button *ngIf="order" routerLink="/orders/{{order?.id}}" class="btn btn-outline-success">{{'checkout-success.viewOrder' | translate}}</button>
+    <button *ngIf="!order" routerLink="/orders" class="btn btn-outline-success">{{'checkout-success.viewAllOrders' | translate}}</button>
 </div>

@@ -21,6 +21,7 @@ export class ValidateTokenComponent implements OnInit {
   ngOnInit(): void {
 
     this.accountService.validateToken(this.activatedRoute.snapshot.queryParamMap.get('token')).subscribe((response: IValidationResponse) => {
+      
       if (response.validToken) {
         this.router.navigate(['/account/activation'], { state: {userName: response.userName}});
       }

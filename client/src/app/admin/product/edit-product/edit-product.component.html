@@ -4,12 +4,12 @@
             <div class="col-12">
                 <div class="tab-panel">
                     <tabset class="product-tabset">
-                        <tab heading="Editar Producto">
+                        <tab heading="{{'edit-product.editHeading' | translate}}">
                             <div class="col-lg-8">
                                 <app-edit-product-form [product]="productFormValues" [brands]="brands" [types]="types"></app-edit-product-form>
                             </div>
                         </tab>
-                        <tab heading="Editar Fotos">
+                        <tab heading="{{'edit-product.editPhotoHeading' | translate}}">
                             <app-edit-product-photos [product]="product"></app-edit-product-photos>
                         </tab>
                     </tabset>

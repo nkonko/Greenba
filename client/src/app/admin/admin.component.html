@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="d-flex justify-content-between my-3">
-                    <header class="h2">Lista de productos</header>
-                    <button [routerLink]="['/admin/create']" class="btn btn-outline-success">Crear nuevo producto</button>
+                    <header class="h2">{{'adminProduct.productList' | translate}}</header>
+                    <button [routerLink]="['/admin/create']" class="btn btn-outline-success">{{'adminProduct.addNewProduct' | translate}}</button>
                 </div>
 
                 <app-paging-header [totalCount]="totalCount" [pageSize]="this.shopParams.pageSize" [pageNumber]="this.shopParams.pageNumber"></app-paging-header>
@@ -17,19 +17,19 @@
                                     <div class="p-2">#</div>
                                 </th>
                                 <th scope="col">
-                                    <div class="p-2 text-uppercase">Producto</div>
+                                    <div class="p-2 text-uppercase">{{'adminProduct.product' | translate}}</div>
                                 </th>
                                 <th scope="col">
-                                    <div class="py-2 text-uppercase">Nombre</div>
+                                    <div class="py-2 text-uppercase">{{'adminProduct.name' | translate}}</div>
                                 </th>
                                 <th scope="col">
-                                    <div class="p-2 px-3 text-uppercase">Precio</div>
+                                    <div class="p-2 px-3 text-uppercase">{{'adminProduct.price' | translate}}</div>
                                 </th>
                                 <th scope="col">
-                                    <div class="p-2 px-3 text-uppercase">Editar</div>
+                                    <div class="p-2 px-3 text-uppercase">{{'adminProduct.edit' | translate}}</div>
                                 </th>
                                 <th scope="col">
-                                    <div class="p-2 px-3 text-uppercase">Borrar</div>
+                                    <div class="p-2 px-3 text-uppercase">{{'adminProduct.delete' | translate}}</div>
                                 </th>
                             </tr>
                         </thead>
@@ -45,8 +45,8 @@
                                     <h5>{{product.name}}</h5>
                                 </th>
                                 <td class="align-middle">{{product.price | currency}}</td>
-                                <td class="align-middle"><button [routerLink]="['edit', product.id]" class="btn btn-warning">Editar</button></td>
-                                <td class="align-middle"><button (click)="deleteProduct(product.id)" class="btn btn-danger">Borrar</button></td>
+                                <td class="align-middle"><button [routerLink]="['edit', product.id]" class="btn btn-warning">{{'adminProduct.edit' | translate}}</button></td>
+                                <td class="align-middle"><button (click)="deleteProduct(product.id)" class="btn btn-danger">{{'adminProduct.delete' | translate}}</button></td>
                             </tr>
                         </tbody>
                     </table>

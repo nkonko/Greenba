@@ -8,6 +8,7 @@ import { ValidateTokenComponent } from './validate-token/validate-token.componen
 import { ActivationComponent } from './activation/activation.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -16,7 +17,8 @@ import { ConfirmPasswordComponent } from './confirm-password/confirm-password.co
   imports: [
     AccountRoutingModule,
     CommonModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ]
 })
 export class AccountModule { }

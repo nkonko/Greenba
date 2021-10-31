@@ -14,13 +14,13 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label>Categorias</label>
+            <label>{{'edit-product-form.categories' | translate}}</label>
             <app-select-dropdown formControlName="productTypeId" [label]="'Categorias'" [Items]="types" [selectedId]="product.productTypeId"></app-select-dropdown>
         </div>
         <div class="form-group col-md-6">
-            <label>Marcas</label>
+            <label>{{'edit-product-form.brands' | translate}}</label>
             <app-select-dropdown formControlName="productBrandId" [label]="'Marcas'" [Items]="brands" [selectedId]="product.productBrandId"></app-select-dropdown>
         </div>
     </div>
-    <button [disabled]="editProductForm.invalid" type="submit" class="btn btn-primary my-3 float-right">Enviar</button>
+    <button [disabled]="editProductForm.invalid" type="submit" class="btn btn-primary my-3 float-right">{{'edit-product-form.send' | translate}}</button>
 </form>

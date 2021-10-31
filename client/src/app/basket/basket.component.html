@@ -1,6 +1,6 @@
 <div class="container mt-2">
     <div *ngIf="(basket$ | async) === null || (basket$ | async).items.length <= 0">
-        <p>No hay items en el carrito</p>
+        <p>{{'basket.noItems' | translate}}</p>
     </div>
     <div *ngIf="(basket$ | async) !== null && (basket$ | async).items.length > 0 as basket">
         <div class="pb-5">
@@ -15,7 +15,7 @@
                     <div class="col-6 offset-6">
                         <app-order-totals *ngIf="(basketTotals$ | async)" [shippingPrice]="(basketTotals$ | async).shipping" [subtotal]="(basketTotals$ | async).subtotal" [total]="(basketTotals$ | async).total">
                         </app-order-totals>
-                        <a routerLink="/checkout" class="btn btn-outline-primary py-2 btn-block">Ir a la revision</a>
+                        <a routerLink="/checkout" class="btn btn-outline-primary py-2 btn-block">{{'basket.goToCheckout' | translate}}</a>
                     </div>
                 </div>
             </div>

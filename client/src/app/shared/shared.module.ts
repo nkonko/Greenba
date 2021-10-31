@@ -21,6 +21,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     NgxDropzoneModule,
     ImageCropperModule,
     BsDatepickerModule.forRoot(),
+    TranslateModule
   ],
   exports: [
     PaginationModule,
