@@ -5,8 +5,8 @@
         <a class="p-2" routerLink="/shop" routerLinkActive="active">{{'core.navbar.shopLink' | translate}}</a>
         <a class="p-2" *appHasRole="['Admin']" routerLink="/admin" routerLinkActive="active">{{'core.navbar.adminLink' |
             translate}}</a>
-        <a class="p-2" [routerLink]="['/services']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{'core.navbar.servicesink' | translate}}</a>
-        <a class="p-2" [routerLink]="['/contact']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{'core.navbar.contactLink' | translate}}</a>
+        <!-- <a class="p-2" [routerLink]="['/services']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{'core.navbar.servicesink' | translate}}</a>
+        <a class="p-2" [routerLink]="['/contact']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{'core.navbar.contactLink' | translate}}</a> -->
     </nav>
     <div class="d-flex align-items-center">
         <a class="position-relative" routerLink="/basket"><i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>

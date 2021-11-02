@@ -34,7 +34,7 @@ export class AdminService {
 
   deleteProductPhoto(photoId: number, productId: number) {
     return this.http.delete(
-      this.baseUrl + 'products/' + productId + '/photo' + photoId
+      this.baseUrl + 'products/' + productId + '/photo/' + photoId
     );
   }
 
