@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
       displayName: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')] ,
         [this.validateEmailNotTaken()]],
-      password: [null, [Validators.required]]
+      password: [null, [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$')]]
     });
   }
 

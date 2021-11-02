@@ -2,9 +2,9 @@
     <div class="container">
         <ng-container *ngIf="!addPhotoMode">
             <div class="d-flex justify-content-between mb-3">
-                <h3>Fotos de producto</h3>
+                <h3>{{'edit-product-photo.productPhoto' | translate}}</h3>
                 <button class="btn btn-primary" (click)="addPhotoModeToggle()">
-          Agregar nueva foto
+                    {{'edit-product-photo.addPhoto' | translate}}
         </button>
             </div>
             <div class="row">
@@ -27,9 +27,9 @@
         </ng-container>
         <ng-container *ngIf="addPhotoMode">
             <div class="d-flex justify-content-between mb-3">
-                <h3>Agregar nueva imagen</h3>
+                <h3>{{'edit-product-photo.addPhoto' | translate}}</h3>
                 <button class="btn btn-outline-secondary" (click)="addPhotoModeToggle()">
-          Cancelar
+                    {{'edit-product-photo.cancel' | translate}}
         </button>
             </div>
             <div class="progress form-group" *ngIf="progress > 0">

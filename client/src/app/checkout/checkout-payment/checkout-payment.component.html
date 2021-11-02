@@ -1,14 +1,14 @@
 <div class="mt-4" [formGroup]="checkoutForm">
     <div class="row">
-        Pagos
+        {{'checkout-payment.payments' | translate}}
     </div>
 </div>
 
 <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
     <button class="btn btn-outline-primary" cdkStepperPrevious>
-    <i class="fa fa-angle-left"></i> Volver
+    <i class="fa fa-angle-left"></i> {{'checkout-payment.return' | translate}}
   </button>
     <button (click)="submitOrder()" class="btn btn-primary">
-    Enviar orden <i class="fa fa-angle-right"></i>
+    {{'checkout-payment.sendOrder' | translate}} <i class="fa fa-angle-right"></i>
   </button>
 </div>

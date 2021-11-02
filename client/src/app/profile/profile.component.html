@@ -15,7 +15,7 @@
                             <div class="card-profile-stats d-flex justify-content-center" style="margin-top: 95px;">
                                 <div>
                                     <span *ngIf="orders.length > 0" class="heading">{{orders.length}}</span>
-                                    <span *ngIf="orders.length > 0" class="description">Ordenes</span>
+                                    <span *ngIf="orders.length > 0" class="description">{{'profile.profile.orders' | translate}}</span>
                                 </div>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                             <i class="ni location_pin mr-2"></i>{{address.province}}, {{address.city}}
                         </div>
                         <hr class="my-4">
-                        <a routerLink="edit" class="btn btn-outline-primary py-2 btn-block" style="cursor: pointer; ">Editar</a>
+                        <a routerLink="edit" class="btn btn-outline-primary py-2 btn-block" style="cursor: pointer; ">{{'profile.profile.edit' | translate}}</a>
                     </div>
                 </div>
             </div>

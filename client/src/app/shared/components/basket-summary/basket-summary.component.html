@@ -4,19 +4,19 @@
             <thead [class.thead-light]="isBasket || isOrder" class="border-0 py-2">
                 <tr>
                     <th scope="col">
-                        <div class="p-2 px-3 text-uppercase">Producto</div>
+                        <div class="p-2 px-3 text-uppercase">{{'basket-summary.product' | translate}}</div>
                     </th>
                     <th scope="col">
-                        <div class="py-2 text-uppercase">Precio</div>
+                        <div class="py-2 text-uppercase">{{'basket-summary.price' | translate}}</div>
                     </th>
                     <th scope="col">
-                        <div class="py-2 text-uppercase">Cantidad</div>
+                        <div class="py-2 text-uppercase">{{'basket-summary.quantity' | translate}}</div>
                     </th>
                     <th scope="col">
                         <div class="py-2 text-uppercase">Total</div>
                     </th>
                     <th *ngIf="isBasket" scope="col">
-                        <div class="py-2 text-uppercase">Quitar</div>
+                        <div class="py-2 text-uppercase">{{'basket-summary.remove' | translate}}</div>
                     </th>
                 </tr>
             </thead>
@@ -30,7 +30,7 @@
                                     <a routerLink="/shop/{{item.id || item.productId}}" class="text-dark">{{item.productName}}</a>
                                 </h5>
                                 <span *ngIf="item.type" class="text-muted font-weight-normal font-italic d-block">
-                  Categoria: {{item.type}}
+                                    {{'basket-summary.category' | translate}}: {{item.type}}
                 </span>
                             </div>
                         </div>

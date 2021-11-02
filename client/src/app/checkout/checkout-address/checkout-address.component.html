@@ -1,8 +1,8 @@
 <div class="mt-4" [formGroup]="checkoutForm">
     <div class="d-flex justify-content-between align-items-center">
-        <h4>Direccion de envío</h4>
+        <h4>{{'checkout-address.shippingAddres' | translate}}</h4>
         <button (click)="saveUserAddress()" [disabled]="!checkoutForm.get('addressForm').valid || !checkoutForm.get('addressForm').dirty" class="btn btn-outline-success mb-3">
-            Guardar datos
+            {{'checkout-address.saveData' | translate}}
         </button>
     </div>
     <div class="row" formGroupName="addressForm">
@@ -29,9 +29,9 @@
 
 <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
     <button class="btn btn-outline-primary" routerLink="/basket">
-        <i class="fa fa-angle-left"></i> Volver
+        <i class="fa fa-angle-left"></i> {{'checkout-address.return' | translate}}
     </button>
     <button [disabled]="checkoutForm.get('addressForm').invalid" class="btn btn-primary" cdkStepperNext>
-        Ir a envio <i class="fa fa-angle-right"></i>
+        {{'checkout-address.goShipping' | translate}} <i class="fa fa-angle-right"></i>
     </button>
 </div>

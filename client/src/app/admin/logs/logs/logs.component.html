@@ -3,7 +3,7 @@
 
         <div class="col-3">
             <div>
-                <h4 class="text-warning">Antigüedad</h4>
+                <h4 class="text-warning">{{'logs.antiquity' | translate}}</h4>
                 <select class="custom-select mb-3 mb-4" (change)="onSortSelected($event.target.value)">
                     <option *ngFor="let time of timeOptions" [selected]="logParams.sort === time.value"
                         [value]="time.value">{{ time.name }}</option>
@@ -12,16 +12,16 @@
         </div>
         <div class="col-3 mb-3">
             <form [formGroup]="logForm">
-                <h4 class="text-warning">Fecha desde:</h4>
+                <h4 class="text-warning">{{'logs.dateFrom' | translate}}:</h4>
                 <app-datepicker formControlName="dateFrom" placeholder="Desde" (ngModelChange)="filter()"></app-datepicker>
                 <br>
-                <h4 class="text-warning">Fecha hasta:</h4>
+                <h4 class="text-warning">{{'logs.dateTo' | translate}}:</h4>
                 <app-datepicker formControlName="dateTo" placeholder="Hasta" (ngModelChange)="filter()"></app-datepicker>
             </form>
         </div>
         <div class="col-3 mb-3">
             <div>
-                <h4 class="text-warning">Nivel</h4>
+                <h4 class="text-warning">{{'logs.level' | translate}}</h4>
                 <select class="custom-select mb-3 mb-4" (change)="onLevelSelected($event.target.value)">
                     <option *ngFor="let level of levelOptions" [selected]="logParams.sort === level.value"
                         [value]="level.value">{{ level.name }}</option>
@@ -35,11 +35,11 @@
                 <thead class="thead-light">
                     <tr>
                         <th>#</th>
-                        <th>Mensaje</th>
-                        <th>Fecha</th>
-                        <th>Excepcion</th>
-                        <th>Nivel</th>
-                        <th>Componente</th>
+                        <th>{{'logs.message' | translate}}</th>
+                        <th>{{'logs.date' | translate}}</th>
+                        <th>{{'logs.exception' | translate}}</th>
+                        <th>{{'logs.level' | translate}}</th>
+                        <th>{{'logs.component' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>

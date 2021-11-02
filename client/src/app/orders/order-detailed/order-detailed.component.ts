@@ -26,6 +26,7 @@ export class OrderDetailedComponent implements OnInit {
       .subscribe(
         (order: IOrder) => {
           this.order = order;
+          this.order.subTotal = order.subtotal;
           this.breadcrumbService.set(
             '@OrderDetailed',
             `Order# ${order.id} - ${order.status}`

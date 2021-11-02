@@ -12,6 +12,21 @@
         <a class="position-relative" routerLink="/basket"><i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
             <div *ngIf="(basket$ | async) as basket" class="cart-no">{{basket.items.length}}</div>
         </a>
+
+        <div class="dropdown ml-3 mr-5" dropdown>
+            <a class="dropdown-toggle" style="cursor: pointer" dropdownToggle>
+                <i class="fa fa-globe mr-3"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
+                <a *ngIf="!langEs" (click)="changeLanguajeEs()" class="dropdown-item d-flex align-items-center bg-light">
+                    <i class="fa fa-globe mr-3"></i> {{'core.navbar.langEs' | translate}}
+                </a>
+                <a *ngIf="langEs" (click)="changeLanguajeEn()" class="dropdown-item d-flex align-items-center bg-light">
+                    <i class="fa fa-globe mr-3"></i> {{'core.navbar.langEs' | translate}}
+                </a>
+            </div>
+        </div>
+
         <ng-container *ngIf="(currentUser$ | async) === null">
             <a routerLink="/account/login" class="btn btn-outline-secondary mr-2">{{'core.navbar.logInLink' |
                 translate}}</a>
@@ -39,17 +54,7 @@
                     <a routerLink="/admin/users" *appHasRole="['Admin']" class="dropdown-item d-flex align-items-center py-2">
                         <i class="fa fa-users mr-3"></i> {{'core.navbar.usersLink' | translate}}
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <div *ngIf="!langEs">
-                        <a (click)="changeLanguajeEs()" class="dropdown-item d-flex align-items-center py-2 bg-light">
-                            <i class="fa fa-globe mr-3"></i> {{'core.navbar.langEs' | translate}}
-                        </a>
-                    </div>
-                    <div *ngIf="langEs">
-                        <a (click)="changeLanguajeEn()" class="dropdown-item d-flex align-items-center py-2 bg-light">
-                            <i class="fa fa-globe mr-3"></i> {{'core.navbar.langEs' | translate}}
-                        </a>
-                    </div>
+
                     <div class="dropdown-divider"></div>
                     <a (click)="logout()" class="dropdown-item d-flex align-items-center py-2 bg-light">
                         <i class="fa fa-sign-out mr-3"></i> {{'core.navbar.logOutLink' | translate}}

@@ -9,13 +9,15 @@ import { EditProductPhotosComponent } from './product/edit-product-photos/edit-p
 import { LogsComponent } from './logs/logs/logs.component';
 import { LogDetailComponent } from './logs/logs/log-detail/log-detail.component';
 import { UsersComponent } from './users/users.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [AdminComponent, EditProductComponent, EditProductFormComponent, EditProductPhotosComponent, LogsComponent, LogDetailComponent, UsersComponent],
   imports: [
     CommonModule,
     SharedModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    TranslateModule
   ]
 })
 export class AdminModule { }
