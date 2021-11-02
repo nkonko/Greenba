@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { ILog } from '../../shared/models/log';
 
 import * as moment from 'moment';
+import { ChartData } from 'src/app/shared/models/chartData';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +61,9 @@ export class LogService {
 
   setLogParams(params: LogParams) {
     this.logParams = params;
+  }
+
+  getChartData() {
+    return this.http.get<ChartData>(this.baseUrl + 'logs/getchartdata');
   }
 }

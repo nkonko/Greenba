@@ -13,11 +13,11 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { BuildServicesComponent } from './build-services/build-services.component';
-import { ContactComponent } from './contact/contact.component';
+import { ContactModule } from './contact/contact.module';
 
 
 @NgModule({
-  declarations: [AppComponent, BuildServicesComponent, ContactComponent],
+  declarations: [AppComponent, BuildServicesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +25,7 @@ import { ContactComponent } from './contact/contact.component';
     HttpClientModule,
     CoreModule,
     HomeModule,
+    ContactModule,
     NgxSpinnerModule,
     TranslateModule.forRoot({
       loader: {

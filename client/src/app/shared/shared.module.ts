@@ -22,6 +22,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TranslateModule } from '@ngx-translate/core';
+import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SelectDropdownComponent,
     PhotoWidgetComponent,
     DatepickerComponent,
+    ChartComponent,
   ],
   imports: [
     CommonModule,
@@ -71,7 +73,8 @@ import { TranslateModule } from '@ngx-translate/core';
     NgxDropzoneModule,
     ImageCropperModule,
     PhotoWidgetComponent,
-    DatepickerComponent
+    DatepickerComponent,
+    ChartComponent
   ],
 })
 export class SharedModule {}
