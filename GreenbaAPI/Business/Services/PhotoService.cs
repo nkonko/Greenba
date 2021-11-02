@@ -33,7 +33,7 @@ namespace Business.Services
             var fileName = await ProcessPhoto(PoductPath, file);
 
             photo.FileName = fileName;
-            photo.PictureUrl = $"{PoductPath}/{fileName}";
+            photo.PictureUrl = PoductPath + "/" + fileName;
 
             return photo;
         }
@@ -67,7 +67,7 @@ namespace Business.Services
         {
             var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
 
-            var filePath = $"{path}/{fileName}";
+            var filePath = Path.Combine(path,fileName);
 
             await using var fileStream = new FileStream(filePath, FileMode.Create);
             await file.CopyToAsync(fileStream);
