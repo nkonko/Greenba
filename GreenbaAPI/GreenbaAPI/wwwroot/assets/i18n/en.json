@@ -1,8 +1,78 @@
 {
+	"account": {
+		"activation": {
+			"activate": "Activate",
+			"activation": "Activation"
+		},
+		"confirm-password": {
+			"change": "Change",
+			"changePassword": "Change password"
+		},
+		"forgot-password": {
+			"enterEmail": "Enter your email",
+			"send": "Send"
+		},
+		"login": {
+			"forgotPassword": "Forgot password?",
+			"signIn": "Sign in"
+		},
+		"register": {
+			"signUp": "Sign up"
+		}
+	},
+	"adminProduct": {
+		"addNewProduct": "Add new product",
+		"delete": "Delete",
+		"edit": "Edit",
+		"name": "Name",
+		"price": "Price",
+		"product": "Product",
+		"productList": "Product list"
+	},
+	"basket": {
+		"goToCheckout": "Confirm order",
+		"noItems": "There are no items in the cart "
+	},
+	"basket-summary": {
+		"category": "Category",
+		"price": "Price",
+		"product": "Product",
+		"quantity": "Quantity",
+		"remove": "Remove"
+	},
+	"breadcrumbs": {
+		"home": "Home"
+	},
+	"checkout-address": {
+		"goShipping": "Go to shipping",
+		"return": "Go back",
+		"saveData": "Save data",
+		"shippingAddres": "Shipping Address"
+	},
+	"checkout-delivery": {
+		"goToCheck": "Check the order",
+		"return": "Go back",
+		"select": "Select shipping method"
+	},
+	"checkout-payment": {
+		"payments": "Payments",
+		"return": "Return",
+		"sendOrder": "Send order"
+	},
+	"checkout-review": {
+		"goToPayment": "Go to payment",
+		"return": "Return"
+	},
+	"checkout-success": {
+		"confirmed": "Thanks. Your order was confirmed",
+		"viewAllOrders": "See all orders",
+		"viewOrder": "View your order"
+	},
 	"core": {
 		"navbar": {
 			"adminLink": "Administrator",
 			"cartLink": "View cart",
+			"contactLink": "Contact",
 			"greetings": "Welcome",
 			"homeLink": "Home",
 			"langEs": "Change to spanish",
@@ -12,6 +82,7 @@
 			"ordersLink": "View orders",
 			"profileLink": "View profile",
 			"registerLink": "Register",
+			"servicesink": "Our services",
 			"shopLink": "Shop",
 			"usersLink": "Users"
 		},
@@ -25,6 +96,20 @@
 			"load": "Loading..."
 		}
 	},
+	"edit-product": {
+		"editHeading": "Edit product",
+		"editPhotoHeading": "Edit Photo"
+	},
+	"edit-product-form": {
+		"brands": "Brands",
+		"categories": "Categories",
+		"send": "Send"
+	},
+	"edit-product-photo": {
+		"addPhoto": "Add new photo",
+		"cancel": "Cancel",
+		"productPhoto": "Product photos"
+	},
 	"home": {
 		"aboutGreenba": "Organic gardens for you",
 		"description1": "No matter the space, we design and build adaptable designs tailored to your possibilities.",
@@ -33,7 +118,59 @@
 		"missionDescription": "Consuming organic food helps you have excellent health. It contributes to maintaining the biochemical balance of the body, consuming vitamins and minerals that we find in them. We have excellent personalized attention to our clients, advice, we answer any questions you have about our services or the benefits and properties that each one provides. ",
 		"socialNetworks": "Social"
 	},
+	"logs": {
+		"antiquity": "Antiquity",
+		"component": "Component",
+		"date": "Date",
+		"dateFrom": "Date from",
+		"dateTo": "Date to",
+		"exception": "Exception",
+		"level": "Level",
+		"message": "Message"
+	},
+	"order-totals": {
+		"order-totals": {
+			"shipping": "Shipping",
+			"shippingPriceSummary": "The shipping price depends on the choice you have selected during the review",
+			"summary": "Summary"
+		}
+	},
+	"paging-header": {
+		"are": "There is",
+		"of": "of",
+		"results": "results",
+		"show": "Show"
+	},
+	"photo-widget": {
+		"photo-widget": {
+			"dropImage": "Drop the image here",
+			"step1": "Step1 - Add photo",
+			"step2": "Step 2 - Resize",
+			"step3": "Step 3 - Review",
+			"uploadImage": "Upload image"
+		}
+	},
+	"profile": {
+		"edit-profile": {
+			"editProfile": "Edit profile",
+			"passwordNotMatch": "Password don't match",
+			"personalData": "Profile data",
+			"save": "Save",
+			"shippingAddress": "Shipping address"
+		},
+		"profile": {
+			"edit": "Edit",
+			"orders": "Orders"
+		}
+	},
+	"select-dropdown": {
+		"select-dropdown": {
+			"required": "Is required"
+		}
+	},
 	"shop": {
+		"brands": "Brands",
+		"categories": "Categories",
 		"deleteButton": "Reset",
 		"product-details": {
 			"addToCartButton": "Add to cart",
@@ -42,6 +179,20 @@
 		"product-item": {
 			"viewButton": "View"
 		},
-		"searchButton": "Search"
+		"searchButton": "Search",
+		"sort": "Sort"
+	},
+	"text-input": {
+		"text-input": {
+			"greaterThanCero": "Must be greater than 0",
+			"invalid": "Invalid",
+			"mustFill": "You must fill",
+			"priceMustBeDecimal": "The Price must be a decimal number",
+			"usedEmail": "Email in use"
+		}
+	},
+	"users": {
+		"enableDisable": "Enable/Disable",
+		"name": "Name"
 	}
 }
